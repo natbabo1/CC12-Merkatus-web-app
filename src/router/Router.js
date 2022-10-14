@@ -4,7 +4,7 @@ function Router() {
   return (
     <Routes>
       <Route path="/" element={<Header />}>
-        <Route index element={<HomePage />}></Route>
+        <Route index element={<HomePage />} />
       </Route>
     </Routes>
   );
