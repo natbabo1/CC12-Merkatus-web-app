@@ -1,5 +1,11 @@
+import HomePage from "./pages/HomePage";
+
 function App() {
-  return <div className="text-9xl text-vivid-orange">Merkatus</div>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 }
 
 export default App;
