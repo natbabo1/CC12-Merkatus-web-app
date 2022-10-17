@@ -1,5 +1,7 @@
+import Router from './router/Router';
+
 function App() {
-  return <div className="text-9xl text-vivid-orange">Merkatus</div>;
+  return <Router />;
 }
 
 export default App;
