@@ -7,6 +7,7 @@ function Router() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
+        <Route path="selling" element={<SellingPage />} />
       </Route>
     </Routes>
   );
