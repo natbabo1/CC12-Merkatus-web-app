@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import Header from '../layouts/header/Header';
+import MainLayout from '../layouts/MainLayout';
 import HomePage from '../pages/HomePage';
-import SellingPage from '../pages/SellingPage';
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Header />}>
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="selling" element={<SellingPage />} />
       </Route>

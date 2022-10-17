@@ -1,10 +1,6 @@
-import { Outlet } from 'react-router-dom';
-
-function Container() {
+function Container({ children }) {
   return (
-    <div className="bg-whisper min-h-screen max-w-7xl mx-auto mt-16">
-      <Outlet />
-    </div>
+    <div className="max-w-7xl mx-auto border min-h-screen pt-8">{children}</div>
   );
 }
 
