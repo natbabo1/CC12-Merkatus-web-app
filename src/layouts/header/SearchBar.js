@@ -1,5 +1,3 @@
-import React from "react";
-
 function SearchBar() {
   return (
     <form className="grow ml-5 mr-10">

@@ -1,11 +1,7 @@
-import Navbar from "./components/ui/Navbar";
+import Router from './router/Router';
 
 function App() {
-  return (
-    <div className="text-9xl text-vivid-orange">
-      <Navbar />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;

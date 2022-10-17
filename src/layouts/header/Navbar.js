@@ -1,9 +1,8 @@
-import React from "react";
-import LogoMerkatus from "../icon/LogoMerkatus";
-import ChatIcon from "../icon/ChatIcon";
-import KartIcon from "../icon/KartIcon";
-import UserIcon from "../icon/UserIcon";
-import SearchBar from "../SearchBar";
+import LogoMerkatus from '../../components/icon/LogoMerkatus';
+import ChatIcon from '../../components/icon/ChatIcon';
+import KartIcon from '../../components/icon/KartIcon';
+import UserIcon from '../../components/icon/UserIcon';
+import SearchBar from './SearchBar';
 
 function Navbar() {
   return (
