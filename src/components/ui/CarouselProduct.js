@@ -184,10 +184,6 @@ function CarouselProduct() {
           </div>
         </div>
       </Carousel>
-      <h6 className="text-2xl text-white p-3 font-bold bg-vivid-orange ">
-        Suggest Product
-      </h6>
-      <br />
       <SuggestProduct />
     </div>
   );
