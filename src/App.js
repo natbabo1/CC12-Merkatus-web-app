@@ -1,12 +1,7 @@
-import LoginForm from "./features/auth/LoginForm";
-import RegisterForm from "./features/auth/RegisterForm";
+import Router from './router/Router';
 
 function App() {
-  return (
-    <div>
-      <RegisterForm />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
