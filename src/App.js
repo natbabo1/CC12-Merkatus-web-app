@@ -1,5 +1,11 @@
+import CategoryProduct from "./pages/CategoryPage";
+
 function App() {
-  return <div className="text-9xl text-vivid-orange">Merkatus</div>;
+  return (
+    <div>
+      <CategoryProduct />
+    </div>
+  );
 }
 
 export default App;
