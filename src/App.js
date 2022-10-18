@@ -1,5 +1,12 @@
+import LoginForm from "./features/auth/LoginForm";
+import RegisterForm from "./features/auth/RegisterForm";
+
 function App() {
-  return <div className="text-9xl text-vivid-orange">Merkatus</div>;
+  return (
+    <div>
+      <RegisterForm />
+    </div>
+  );
 }
 
 export default App;
