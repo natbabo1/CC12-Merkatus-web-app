@@ -1,5 +1,11 @@
+import SellerProfilePage from "./pages/SellerProfilePage";
+
 function App() {
-  return <div className="text-9xl text-vivid-orange">Merkatus</div>;
+  return (
+    <div>
+      <SellerProfilePage />
+    </div>
+  );
 }
 
 export default App;
