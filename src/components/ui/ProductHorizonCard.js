@@ -1,4 +1,25 @@
-function ProductHorizonCard({ status }) {
+import { BUYER, SELLER, PAID, TRANSFER, RECEIVED } from '../../utils/constaint';
+
+function ProductHorizonCard({ role, status }) {
+  const buttonType = (() => {
+    if (role === BUYER) {
+      if (status === TRANSFER) {
+        return 'รายละเอียด';
+      }
+      if (status === RECEIVED) {
+        return 'ยืนยัน';
+      }
+    }
+    if (role === SELLER) {
+      if (status === PAID) {
+        return 'ส่งสินค้า';
+      }
+      if (status === RECEIVED) {
+        return 'ติดต่อผู้ซื้อ';
+      }
+    }
+  })();
+
   return (
     <div className="bg-vivid-orange/30 flex rounded-3xl h-40 py-5 pl-5 pr-10">
       <img
@@ -39,9 +60,15 @@ function ProductHorizonCard({ status }) {
             พัสดุถึงปลายทาง
           </label>
         </div>
-        <div className="">
-          <i className="fa-regular fa-heart text-vivid-orange text-lg mr-3" />
-          <span className="font-bold">5 Wish list</span>
+        <div className="h-6">
+          {role === BUYER ? (
+            ' '
+          ) : (
+            <>
+              <i className="fa-regular fa-heart text-vivid-orange text-lg mr-3" />
+              <span className="font-bold">5 Wish list</span>
+            </>
+          )}
         </div>
       </div>
       <div className="flex flex-col justify-between grow ml-4">
@@ -50,10 +77,10 @@ function ProductHorizonCard({ status }) {
         </div>
         <div
           className={`text-white flex items-center justify-center bg-vivid-orange h-10 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net${
-            status === 'ONSALE' ? ' hidden' : ''
+            status === PAID ? ' hidden' : ''
           }`}
         >
-          {status === 'PREPARE' ? 'ส่งสินค้า' : 'ติดต่อผู้ซื้อ'}
+          {buttonType}
         </div>
       </div>
     </div>
