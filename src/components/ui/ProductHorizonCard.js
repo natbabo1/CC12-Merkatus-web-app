@@ -3,10 +3,10 @@ import { BUYER, SELLER, PAID, TRANSFER, RECEIVED } from '../../utils/constaint';
 function ProductHorizonCard({ role, status }) {
   const buttonType = (() => {
     if (role === BUYER) {
-      if (status === TRANSFER) {
+      if (status === PAID) {
         return 'รายละเอียด';
       }
-      if (status === RECEIVED) {
+      if (status === TRANSFER) {
         return 'ยืนยัน';
       }
     }
@@ -14,7 +14,7 @@ function ProductHorizonCard({ role, status }) {
       if (status === PAID) {
         return 'ส่งสินค้า';
       }
-      if (status === RECEIVED) {
+      if (status === TRANSFER) {
         return 'ติดต่อผู้ซื้อ';
       }
     }
@@ -77,7 +77,7 @@ function ProductHorizonCard({ role, status }) {
         </div>
         <div
           className={`text-white flex items-center justify-center bg-vivid-orange h-10 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net${
-            status === PAID ? ' hidden' : ''
+            status ? '' : ' hidden'
           }`}
         >
           {buttonType}

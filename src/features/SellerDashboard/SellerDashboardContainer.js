@@ -3,6 +3,7 @@ import ProductHorizonCard from '../../components/ui/ProductHorizonCard';
 import DashboardGroup from './DashboardGroup';
 import ProductListing from '../../components/ui/ProductListing';
 import SellerMenu from './SellerMenu';
+import { SELLER, PAID, TRANSFER } from '../../utils/constaint';
 
 function SellerDashboardContainer() {
   return (
@@ -18,11 +19,11 @@ function SellerDashboardContainer() {
         <div className="w-40"></div>
         <div className="grow border pl-20 mt-4">
           <ProductListing title="รายการสินค้าล่าสุด" />
-          <ProductHorizonCard status="ONSALE" />
+          <ProductHorizonCard role={SELLER} status={null} />
           <ProductListing title="สินค้าที่ต้องจัดส่ง" />
-          <ProductHorizonCard status="PREPARE" />
+          <ProductHorizonCard role={SELLER} status={PAID} />
           <ProductListing title="สินค้าที่รอการยืนยัน" />
-          <ProductHorizonCard status="WAITFORCONFIRM" />
+          <ProductHorizonCard role={SELLER} status={TRANSFER} />
         </div>
       </div>
     </div>

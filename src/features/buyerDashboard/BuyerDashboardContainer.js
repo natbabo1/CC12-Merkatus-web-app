@@ -2,7 +2,7 @@ import Avatar from '../../components/ui/Avatar';
 import ProductHorizonCard from '../../components/ui/ProductHorizonCard';
 import ProductFilterMenu from './ProductFilterMenu';
 import ProductListing from '../../components/ui/ProductListing';
-import { BUYER, SELLER, PAID, TRANSFER, RECEIVED } from '../../utils/constaint';
+import { BUYER, PAID, TRANSFER } from '../../utils/constaint';
 
 function BuyerDashboardContainer() {
   return (
@@ -16,10 +16,10 @@ function BuyerDashboardContainer() {
       <div className="flex w-full ">
         <div className="w-40"></div>
         <div className="grow border pl-20 mt-4">
-          <ProductListing title="สินค้าที่อยู่ระหว่างการจัดส่ง" />
-          <ProductHorizonCard role={BUYER} status={TRANSFER} />
+          <ProductListing title="สินค้าที่รอการจัดส่ง" />
+          <ProductHorizonCard role={BUYER} status={PAID} />
           <ProductListing title="สินค้าที่รอการยืนยัน" />
-          <ProductHorizonCard role={BUYER} status={RECEIVED} />
+          <ProductHorizonCard role={BUYER} status={TRANSFER} />
         </div>
       </div>
     </div>
