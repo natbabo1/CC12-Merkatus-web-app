@@ -1,4 +1,4 @@
-import SellerDashboardContainer from '../features/SellerDashboard/SellerDashboardContainer';
+import SellerDashboardContainer from '../features/sellerDashboard/SellerDashboardContainer';
 
 function SellerPage() {
   return <SellerDashboardContainer />;
