@@ -1,11 +1,7 @@
-import CarouselProduct from "../components/ui/CarouselProduct";
+import HomeContainer from "../features/home/HomeContainer";
 
 function HomePage() {
-  return (
-    <div className="flex flex-col justify-center items-center">
-      <CarouselProduct />
-    </div>
-  );
+  return <HomeContainer />;
 }
 
 export default HomePage;
