@@ -12,6 +12,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path='selling' element={<SellingPage />} />
         <Route path='buying' element={<BuyingPage />} />
+        <Route path='product' element={<ProductPage />} />
       </Route>
     </Routes>
   );
