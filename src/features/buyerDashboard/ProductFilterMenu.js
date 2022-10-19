@@ -1,8 +1,8 @@
-import WalletIcon from '../../components/icon/WalletIcon';
-import BoxIcon from '../../components/icon/BoxIcon';
-import TruckIcon from '../../components/icon/TruckIcon';
-import StarIcon from '../../components/icon/StarIcon';
-import StoreIcon from '../../components/icon/StoreIcon';
+import WalletIcon from "../../components/icon/WalletIcon";
+import BoxIcon from "../../components/icon/BoxIcon";
+import TruckIcon from "../../components/icon/TruckIcon";
+import StarIcon from "../../components/icon/StarIcon";
+import StoreIcon from "../../components/icon/StoreIcon";
 
 function ProductFilterMenu() {
   return (

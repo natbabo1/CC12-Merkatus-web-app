@@ -1,8 +1,9 @@
-import LogoMerkatus from '../../components/icon/LogoMerkatus';
-import ChatIcon from '../../components/icon/ChatIcon';
-import KartIcon from '../../components/icon/KartIcon';
-import UserIcon from '../../components/icon/UserIcon';
-import SearchBar from './SearchBar';
+import LogoMerkatus from "../../components/icon/LogoMerkatus";
+import ChatIcon from "../../components/icon/ChatIcon";
+import KartIcon from "../../components/icon/KartIcon";
+import UserIcon from "../../components/icon/UserIcon";
+import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -11,18 +12,18 @@ function Navbar() {
         <nav>
           <div className="relative flex h-20px items-center justify-between">
             <div className="grow flex items-center justify-center sm:items-stretch sm:justify-start">
-              <div className="w-20 flex items-center">
+              <Link to="/" className="w-20 flex items-center">
                 <LogoMerkatus />
-              </div>
+              </Link>
               <SearchBar />
             </div>
             <div className="flex space-x-4">
               <div className="w-12">
                 <ChatIcon />
               </div>
-              <div className="w-12">
+              <Link to="/mycart" className="w-12">
                 <KartIcon />
-              </div>
+              </Link>
               <div className="w-12">
                 <UserIcon />
               </div>

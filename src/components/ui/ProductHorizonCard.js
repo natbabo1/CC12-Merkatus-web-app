@@ -1,27 +1,27 @@
-import { BUYER, SELLER, PAID, TRANSFER, RECEIVED } from '../../utils/constaint';
+import { BUYER, SELLER, PAID, TRANSFER } from "../../utils/constaint";
 
 function ProductHorizonCard({ role, status }) {
   const buttonType = (() => {
     if (role === BUYER) {
       if (status === PAID) {
-        return 'รายละเอียด';
+        return "รายละเอียด";
       }
       if (status === TRANSFER) {
-        return 'ยืนยัน';
+        return "ยืนยัน";
       }
     }
     if (role === SELLER) {
       if (status === PAID) {
-        return 'ส่งสินค้า';
+        return "ส่งสินค้า";
       }
       if (status === TRANSFER) {
-        return 'ติดต่อผู้ซื้อ';
+        return "ติดต่อผู้ซื้อ";
       }
     }
   })();
 
   return (
-    <div className="bg-vivid-orange/30 flex rounded-3xl h-40 py-5 pl-5 pr-10">
+    <div className="bg-vivid-orange/30 flex rounded-3xl h-40 py-5 pl-5 pr-10 grow">
       <img
         className="rounded-md mr-8 w-"
         src="https://picsum.photos/200"
@@ -62,7 +62,7 @@ function ProductHorizonCard({ role, status }) {
         </div>
         <div className="h-6">
           {role === BUYER ? (
-            ' '
+            " "
           ) : (
             <>
               <i className="fa-regular fa-heart text-vivid-orange text-lg mr-3" />
@@ -77,7 +77,7 @@ function ProductHorizonCard({ role, status }) {
         </div>
         <div
           className={`text-white flex items-center justify-center bg-vivid-orange h-10 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net${
-            status ? '' : ' hidden'
+            status ? "" : " hidden"
           }`}
         >
           {buttonType}

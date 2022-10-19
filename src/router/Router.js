@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
-import MainLayout from '../layouts/MainLayout';
-import HomePage from '../pages/HomePage';
-import SellingPage from '../pages/SellingPage';
-import BuyingPage from '../pages/BuyingPage';
+import { Routes, Route } from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import HomePage from "../pages/HomePage";
+import SellingPage from "../pages/SellingPage";
+import BuyingPage from "../pages/BuyingPage";
+import CartPage from "../pages/CartPage";
 
 function Router() {
   return (
@@ -11,6 +12,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="selling" element={<SellingPage />} />
         <Route path="buying" element={<BuyingPage />} />
+        <Route path="mycart" element={<CartPage />} />
       </Route>
     </Routes>
   );
