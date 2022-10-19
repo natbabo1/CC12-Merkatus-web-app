@@ -1,88 +1,39 @@
 import React from "react";
+import ProductCard from "../components/ui/ProductCard";
+
+const productPlaceholder = {
+  name: "Product Name",
+  category: "เสื้อผ้าชาย",
+  price: "300 ฿",
+  image: "https://picsum.photos/200"
+};
 
 function CategoryProduct() {
   return (
-    <div className="mx-80 flex-col">
-      <h6 className="text-2xl text-white p-4 font-bold bg-vivid-orange ">
+    <>
+      <h6 className="text-2xl mb-6 text-white p-3 bg-vivid-orange">
         Category Product
       </h6>
-
-      <div className=" p-8 grid gap-y-6 grid-cols-5 place-items-center border-solid border-2 border-blue-600">
-        {/* <div className="flex flex-wrap justify-center gap-x-4 gap-y-2"> */}
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
+      <div className="w-[86%] flex items-center mx-auto">
+        <div className="flex flex-wrap py-2 justify-center gap-x-4 gap-y-6">
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
+          <ProductCard product={productPlaceholder} />
         </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-        <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
-          <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
-          <br />
-          <h1>Name</h1>
-          <h1>Category</h1>
-          <h1>Price</h1>
-        </div>
-
-        {/* </div> */}
       </div>
-    </div>
+    </>
   );
 }
 
