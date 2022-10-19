@@ -19,7 +19,8 @@ module.exports = {
       'idyllic-isle': '#90C8D1',
       'blue-shale': '#B9CACD',
       'cosmic-dust': '#DAE1E4',
-      'tin-color': '#919191'
+      'tin-color': '#919191',
+      whisper: '#EDECEC'
     }
   },
   plugins: [require('flowbite/plugin')]

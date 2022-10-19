@@ -1,11 +1,7 @@
-import SellerProfilePage from "./pages/SellerProfilePage";
+import Router from "./router/Router";
 
 function App() {
-  return (
-    <div>
-      <SellerProfilePage />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;

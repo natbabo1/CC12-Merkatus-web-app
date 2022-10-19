@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
+
+* {
+  font-family: "Prompt", sans-serif;
+}
+
+:root {
+  background: #edecec;
+}
+
+* {
+  background-color: #edecec;
+}
