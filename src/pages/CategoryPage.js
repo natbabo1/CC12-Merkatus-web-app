@@ -7,7 +7,7 @@ function CategoryProduct() {
         Category Product
       </h6>
 
-      <div className="p-8 grid gap-y-6 grid-cols-5 place-items-center border-solid border-2 border-blue-600">
+      <div className=" p-8 grid gap-y-6 grid-cols-5 place-items-center border-solid border-2 border-blue-600">
         {/* <div className="flex flex-wrap justify-center gap-x-4 gap-y-2"> */}
         <div className="w-56 h-64 flex-row rounded-3xl text-center p-4 bg-vivid-orange/30 cursor-pointer">
           <img src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
