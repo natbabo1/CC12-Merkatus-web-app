@@ -3,6 +3,8 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import SellingPage from "../pages/SellingPage";
 import BuyingPage from "../pages/BuyingPage";
+import ProductPage from "../pages/ProductPage";
+import AddressEditPage from "../pages/AddressEditPage";
 
 function Router() {
   return (
