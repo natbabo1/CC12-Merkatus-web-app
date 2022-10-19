@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import SellingPage from "../pages/SellingPage";
 import BuyingPage from "../pages/BuyingPage";
+import AddressEditPage from "../pages/AddressEditPage";
 
 function Router() {
   return (
@@ -11,6 +12,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="selling" element={<SellingPage />} />
         <Route path="buying" element={<BuyingPage />} />
+        <Route path="address" element={<AddressEditPage />} />
       </Route>
     </Routes>
   );
