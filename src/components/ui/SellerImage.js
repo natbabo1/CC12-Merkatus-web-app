@@ -1,8 +1,15 @@
 import React from "react";
 
-function SellerImage() {
+function SellerImage({ src }) {
   return (
-    <img src="https://www.ziglar.com/wp-content/uploads/2016/09/michelle-prince-profile-img.png" />
+    <div className="w-64">
+      <div className="relative w-full pt-[100%] overflow-hidden">
+        <img
+          className="block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg"
+          src={src}
+        />
+      </div>
+    </div>
   );
 }
 
