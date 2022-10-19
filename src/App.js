@@ -1,11 +1,7 @@
-import CategoryProduct from "./pages/CategoryPage";
+import Router from "./router/Router";
 
 function App() {
-  return (
-    <div>
-      <CategoryProduct />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
