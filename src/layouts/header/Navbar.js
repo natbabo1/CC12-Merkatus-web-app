@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import LogoMerkatus from "../../components/icon/LogoMerkatus";
 import ChatIcon from "../../components/icon/ChatIcon";
 import KartIcon from "../../components/icon/KartIcon";
 import UserIcon from "../../components/icon/UserIcon";
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";
+import LoginForm from "../../features/auth/LoginForm";
+import { useModal } from "../../contexts/ModalContext";
 
 function Navbar() {
+  const { openFormModal } = useModal();
   return (
     <div className="w-screen fixed top-0 left-0 z-30 bg-whisper pb-2">
       <div className="mx-auto max-w-7xl mt-4 px-2 sm:px-6 lg:px-8">
@@ -24,7 +27,10 @@ function Navbar() {
               <Link to="/mycart" className="w-12">
                 <KartIcon />
               </Link>
-              <div className="w-12">
+              <div
+                className="w-12 cursor-pointer"
+                onClick={() => openFormModal(<LoginForm />)}
+              >
                 <UserIcon />
               </div>
             </div>

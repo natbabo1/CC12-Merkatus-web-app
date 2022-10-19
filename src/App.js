@@ -1,7 +1,13 @@
-import Router from './router/Router';
+import Modal from "./components/ui/Modal";
+import Router from "./router/Router";
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <Modal />
+      <Router />;
+    </>
+  );
 }
 
 export default App;
