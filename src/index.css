@@ -1,12 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Prompt&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Prompt&display=swap");
 
 * {
-  font-family: 'Prompt', sans-serif;
+  font-family: "Prompt", sans-serif;
 }
 
 :root {
   background: #edecec;
+}
+
+body {
+  overflow: overlay;
+}
+
+*::-webkit-scrollbar {
+  display: block;
+  width: 16px;
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #00000000;
+}
+
+*::-webkit-scrollbar-track-piece {
+  background-color: #00000000;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #00000000;
+  border: 5px solid transparent;
+  border-radius: 24px;
+  box-shadow: 4px 0px 0px 4px #00000040 inset;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #00000040;
+  border: 0px solid transparent;
+  box-shadow: none;
 }
