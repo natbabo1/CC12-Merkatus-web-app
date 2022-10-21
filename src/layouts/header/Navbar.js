@@ -8,9 +8,11 @@ import ChatIcon from "../../components/icon/ChatIcon";
 import KartIcon from "../../components/icon/KartIcon";
 import UserIcon from "../../components/icon/UserIcon";
 import UserDropdown from "./UserDropdown";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Navbar() {
   const { openFormModal } = useModal();
+  const { user } = useAuth();
 
   const [openDropdown, setOpenDropdown] = useState(false);
   const dropdown = useRef();
@@ -45,12 +47,16 @@ function Navbar() {
               <Link to="/mycart" className="w-12">
                 <KartIcon />
               </Link>
-              <div
-                className="w-12 cursor-pointer"
-                onClick={() => openFormModal(<LoginForm />)}
-              >
-                <UserIcon />
-              </div>
+              {!user ? (
+                <div
+                  className="w-12 cursor-pointer"
+                  onClick={() => openFormModal(<LoginForm />)}
+                >
+                  <UserIcon />
+                </div>
+              ) : (
+                <div>{user.firstName}</div>
+              )}
               <div
                 className="relative flex items-center hover:text-mermaid-net cursor-pointer"
                 ref={dropdown}

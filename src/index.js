@@ -5,13 +5,16 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import "./index.css";
 import App from "./App";
 import ModalContextProvider from "./contexts/ModalContext";
-
+import AuthContextProvider from "./contexts/AuthContext";
+import "react-toastify/dist/ReactToastify.css";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <ModalContextProvider>
-      <App />
-    </ModalContextProvider>
+    <AuthContextProvider>
+      <ModalContextProvider>
+        <App />
+      </ModalContextProvider>
+    </AuthContextProvider>
   </BrowserRouter>
 );
 
