@@ -1,10 +1,10 @@
-import CarouselProduct from "./CarouselProduct";
+import CarouselCategory from "./CarouselCategory";
 import SuggestProduct from "./SuggestProduct";
 
 function HomeContainer() {
   return (
     <>
-      <CarouselProduct />
+      <CarouselCategory />
       <SuggestProduct />
     </>
   );
