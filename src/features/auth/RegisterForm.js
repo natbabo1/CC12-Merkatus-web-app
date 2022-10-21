@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-
+import { toast } from "react-toastify";
+import * as validateService from "../../validations/userValidate";
 function RegisterForm() {
   const { register } = useAuth();
   const [input, setInput] = useState({
@@ -18,6 +19,13 @@ function RegisterForm() {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+
+    const { error } = validateService.validateRegister(input);
+
+    if (error) {
+      return toast.error(error.message);
+    }
+
     try {
       await register(input);
     } catch (err) {
@@ -49,6 +57,7 @@ function RegisterForm() {
             Firstname
           </label>
         </div>
+
         <div className="relative">
           <input
             type="text"
@@ -66,6 +75,7 @@ function RegisterForm() {
             Lastname
           </label>
         </div>
+
         <div className="relative">
           <input
             type="text"

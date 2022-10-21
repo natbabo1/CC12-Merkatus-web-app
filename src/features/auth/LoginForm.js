@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import { useModal } from "../../contexts/ModalContext";
 import RegisterForm from "../../features/auth/RegisterForm";
@@ -17,11 +18,14 @@ function LoginForm() {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+
     try {
       await login(input);
+      toast.success("success login");
       closeModal();
     } catch (err) {
       console.log(err);
+      toast.error("cant login");
     }
   };
 
