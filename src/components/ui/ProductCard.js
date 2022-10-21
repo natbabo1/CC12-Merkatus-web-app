@@ -9,11 +9,11 @@ function ProductCard({ product }) {
         />
       </div>
       <div className="flex flex-col items-center mt-4">
-        <div className="text-xl">{product.name}</div>
-        <div className="text-vivid-orange text-base mt-1">
-          {product.category}
+        <div className="text-xl">{product.productName}</div>
+        <div className="text-vivid-orange text-base text-center mt-1">
+          {product.Category.categoryName}
         </div>
-        <div className="text-xl font-semibold">{product.price}</div>
+        <div className="text-xl font-semibold">{product.unitPrice}</div>
       </div>
     </div>
   );
