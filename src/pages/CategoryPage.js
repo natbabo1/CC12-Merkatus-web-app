@@ -3,13 +3,6 @@ import ProductCard from "../components/ui/ProductCard";
 import * as productService from ".././api/productApi";
 import { useParams } from "react-router-dom";
 
-const productPlaceholder = {
-  name: "Product Name",
-  category: "เสื้อผ้าชาย",
-  price: "300 ฿",
-  image: "https://picsum.photos/200",
-};
-
 function CategoryProduct() {
   const { categoryId } = useParams();
 
@@ -19,14 +12,13 @@ function CategoryProduct() {
     const fetch = async () => {
       try {
         const res = await productService.getProductByCategory(categoryId);
-        console.log(res.data.products);
         setProductCategory(res.data.products);
       } catch (err) {
         console.log(err);
       }
     };
     fetch();
-  }, []);
+  }, [categoryId]);
 
   return (
     <>

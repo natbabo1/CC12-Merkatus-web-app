@@ -10,6 +10,7 @@ import AddressEditPage from "../pages/AddressEditPage";
 import AddProductPage from "../pages/AddProductPage";
 import CartPage from "../pages/CartPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function Router() {
   return (
@@ -22,9 +23,10 @@ function Router() {
         <Route path="addproduct" element={<AddProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="address" element={<AddressEditPage />} />
-        <Route path="profile" element={<SellerProfilePage />} />
+        <Route path="profile/:sellerId" element={<SellerProfilePage />} />
         <Route path="mycart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
