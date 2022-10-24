@@ -2,13 +2,6 @@ import { useEffect, useState } from "react";
 import ProductCard from "../../components/ui/ProductCard";
 import * as productService from "../../api/productApi";
 
-const productPlaceholder = {
-  name: "Product Name",
-  Category: { categoryName: "เสื้อผ้าชาย" },
-  price: "300 ฿",
-  image: "https://picsum.photos/200"
-};
-
 function SuggestProduct() {
   const [products, setProducts] = useState([]);
 
