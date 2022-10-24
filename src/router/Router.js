@@ -9,6 +9,7 @@ import SellerProfilePage from "../pages/SellerProfilePage";
 import AddressEditPage from "../pages/AddressEditPage";
 import AddProductPage from "../pages/AddProductPage";
 import CartPage from "../pages/CartPage";
+import SettingPage from "../pages/SettingPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 
@@ -24,6 +25,7 @@ function Router() {
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="address" element={<AddressEditPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
+        <Route path="setting" element={<SettingPage />} />
         <Route path="mycart" element={<CartPage />} />
         <Route path="checkout" element={<CheckoutPage />} />
         <Route path="*" element={<NotFoundPage />} />
