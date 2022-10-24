@@ -6,9 +6,10 @@ import SearchBar from "./SearchBar";
 import LogoMerkatus from "../../components/icon/LogoMerkatus";
 import ChatIcon from "../../components/icon/ChatIcon";
 import KartIcon from "../../components/icon/KartIcon";
-import UserIcon from "../../components/icon/UserIcon";
+import LoginIcon from "../../components/icon/LoginIcon";
 import UserDropdown from "./UserDropdown";
 import { useAuth } from "../../contexts/AuthContext";
+import Avatar from "../../components/ui/Avatar";
 
 function Navbar() {
   const { openFormModal } = useModal();
@@ -47,24 +48,25 @@ function Navbar() {
               <Link to="/mycart" className="w-12">
                 <KartIcon />
               </Link>
-              {!user ? (
+              {user ? (
+                <div
+                  className="relative flex items-center cursor-pointer"
+                  ref={dropdown}
+                  onClick={() => setOpenDropdown((prev) => !prev)}
+                >
+                  <div className="w-12 rounded-full overflow-hidden">
+                    <Avatar src={user.profileImage} />
+                  </div>
+                  {openDropdown && <UserDropdown />}
+                </div>
+              ) : (
                 <div
                   className="w-12 cursor-pointer"
                   onClick={() => openFormModal(<LoginForm />)}
                 >
-                  <UserIcon />
+                  <LoginIcon />
                 </div>
-              ) : (
-                <div>{user.firstName}</div>
               )}
-              <div
-                className="relative flex items-center hover:text-mermaid-net cursor-pointer"
-                ref={dropdown}
-                onClick={() => setOpenDropdown((prev) => !prev)}
-              >
-                <i className="fa-solid fa-caret-down -ml-2 text-tin-color " />
-                {openDropdown && <UserDropdown />}
-              </div>
             </div>
           </div>
         </nav>
