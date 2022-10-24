@@ -1,3 +1,5 @@
+import { toBaht } from "../../utils/numberFormat";
+
 function ProductCard({ product }) {
   return (
     <div className="w-48 bg-vivid-orange/30 p-4 rounded-3xl">
@@ -10,10 +12,10 @@ function ProductCard({ product }) {
       </div>
       <div className="flex flex-col items-center mt-4">
         <div className="text-xl">{product.productName}</div>
-        <div className="text-vivid-orange text-base text-center mt-1">
+        <div className="text-vivid-orange text-base text-center mt-1 h-16">
           {product.Category.categoryName}
         </div>
-        <div className="text-xl font-semibold">{product.unitPrice}</div>
+        <div className="text-xl font-semibold">{toBaht(product.unitPrice)}</div>
       </div>
     </div>
   );

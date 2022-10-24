@@ -10,7 +10,6 @@ function CarouselCategory() {
     const fetch = async () => {
       try {
         const res = await categoryService.getAllCategory();
-        console.log(res.data.allCategory);
         setCategory(res.data.allCategory);
       } catch (err) {
         console.log(err);
@@ -24,18 +23,12 @@ function CarouselCategory() {
     for (let i = 0; i < category.length; i += 10) {
       const categoryCards = category
         .slice(i, i + 10)
-        .map((item) => (
-          <CategoryCard
-            key={item.id}
-            category={item.categoryName}
-            categoryId={item.id}
-          />
-        ));
+        .map((item) => <CategoryCard key={item.id} category={item} />);
 
       slides.push(
         <div
           key={i}
-          className="flex flex-wrap justify-center w-[86%] gap-x-7 gap-y-5  text-center font-bold -mt-6"
+          className="flex flex-wrap justify-center w-[86%] gap-x-7 gap-y-5 items-end text-center font-bold -mt-3"
         >
           {categoryCards}
         </div>
