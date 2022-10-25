@@ -12,9 +12,9 @@ const registerSchema = Joi.object({
       .pattern(/^[0-9]+$/)
       .required()
   ),
-  phoneNumber: Joi.number().$.min(10).max(10),
+  phoneNumber: Joi.string().min(10).max(10),
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,16}$")).required(),
-  confirmPassword: Joi.ref("password"),
+  confirmPassword: Joi.ref("password")
 }).with("password", "confirmPassword");
 
 export const validateRegister = (input) =>
