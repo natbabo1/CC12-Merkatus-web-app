@@ -1,6 +1,5 @@
-import { useAuth } from "../../contexts/AuthContext";
-
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 function UserDropdown() {
   const { logout } = useAuth();
@@ -27,7 +26,9 @@ function UserDropdown() {
       >
         ร้านค้าของฉัน
       </Link>
-      <div className="py-2 cursor-pointer hover:text-tin-color">ตั้งค่า</div>
+      <Link to="/setting" className="py-2 cursor-pointer hover:text-tin-color">
+        ตั้งค่า
+      </Link>
       <div
         className="py-2 cursor-pointer hover:text-tin-color"
         onClick={handleLogout}
