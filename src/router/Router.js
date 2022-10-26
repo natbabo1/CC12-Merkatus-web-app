@@ -15,6 +15,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import NotLoginPage from "../pages/NotLoginPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
 import { useAuth } from "../contexts/AuthContext";
+import ChangeEmailPage from "../pages/ChangeEmailPage";
 
 function Router() {
   const { user } = useAuth();
@@ -27,11 +28,12 @@ function Router() {
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
         <Route path="setting" element={<SettingPage />} />
+        <Route path="/password" element={<ChangePasswordPage />} />
+        <Route path="/email" element={<ChangeEmailPage />} />
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
             <Route path="/address" element={<AddressEditPage />} />
-            <Route path="/password" element={<ChangePasswordPage />} />
             <Route path="/mycart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/selling" element={<SellingPage />} />

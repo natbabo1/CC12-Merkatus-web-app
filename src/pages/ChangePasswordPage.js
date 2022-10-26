@@ -12,7 +12,9 @@ function ChangePasswordPage() {
             placeholder="Old Password"
           />
 
-          <button className="text-[#29C6CD] text-right">ลืมรหัสผ่าน ?</button>
+          <button className="text-[#29C6CD] text-right hover:underline ">
+            ลืมรหัสผ่าน ?
+          </button>
 
           <input
             type="text"
