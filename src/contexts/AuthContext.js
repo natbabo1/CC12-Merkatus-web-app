@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken
+  removeAccessToken,
 } from "../utils/localStorage";
 import * as authService from "../api/authApi";
 import { toast } from "react-toastify";
@@ -26,25 +26,15 @@ function AuthContextProvider({ children }) {
   }, []);
 
   const register = async (input) => {
-    try {
-      const res = await authService.register(input);
-      addAccessToken(res.data.token);
-      getMe();
-    } catch (err) {
-      toast.error(err.response?.data?.message);
-      console.log(err);
-    }
+    const res = await authService.register(input);
+    addAccessToken(res.data.token);
+    getMe();
   };
 
   const login = async (input) => {
-    try {
-      const res = await authService.login(input);
-      addAccessToken(res.data.token);
-      getMe();
-    } catch (err) {
-      toast.error(err.response?.data?.message);
-      console.log(err);
-    }
+    const res = await authService.login(input);
+    addAccessToken(res.data.token);
+    getMe();
   };
 
   const logout = () => {

@@ -25,7 +25,7 @@ function LoginForm() {
       closeModal();
     } catch (err) {
       console.log(err);
-      toast.error("cant login");
+      toast.error(err.response?.data?.message);
     }
   };
 

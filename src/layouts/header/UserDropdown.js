@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 
 function UserDropdown() {
@@ -6,6 +7,7 @@ function UserDropdown() {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    toast.success("logout success");
     navigate("/");
   };
 

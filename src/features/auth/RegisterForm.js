@@ -1,37 +1,103 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
-import * as validateService from "../../validations/userValidate";
+import { useModal } from "../../contexts/ModalContext";
+
 function RegisterForm() {
+  const { closeModal } = useModal();
   const { register } = useAuth();
-  const [input, setInput] = useState({
+  const initialValues = {
     firstName: "",
     lastName: "",
     password: "",
     confirmPassword: "",
     email: "",
     phoneNumber: "",
-  });
+  };
+  const [input, setInput] = useState(initialValues);
+  const [inputError, setInputError] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    const regName = /^[a-zA-Z]+$/;
+    if (!values.firstName) {
+      errors.firstName = "Firstname is required!";
+    } else if (!regName.test(values.firstName)) {
+      errors.firstName = "Firstname is invalid!";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Lastname is required!";
+    } else if (!regName.test(values.lastName)) {
+      errors.lastName = "lastName is invalid!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.phoneNumber) {
+      errors.phoneNumber = "Phonenumber is required!";
+    } else if (values.phoneNumber.length < 10) {
+      errors.phoneNumber = "Mobile is invalid format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be more than 6 characters!";
+    }
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "ConfirmPassword is required!";
+    } else if (values.password != values.confirmPassword) {
+      errors.confirmPassword = "Password and ConfirmPassword does not match";
+    }
+    return errors;
+  };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-
-    const { error } = validateService.validateRegister(input);
-
-    if (error) {
-      return toast.error(error.message);
+    setInputError({});
+    const errorsN = validate(input);
+    if (Object.keys(errorsN).length > 0) {
+      setInputError(errorsN);
+      return;
     }
 
     try {
       await register(input);
+      toast.success("Success Register");
+      closeModal();
     } catch (err) {
-      console.log(err);
+      if (err.response?.data?.message === "email must be unique") {
+        setInputError({ email: "email already used" });
+      }
+      if (err.response?.data?.message === "phone_number must be unique") {
+        setInputError((prev) => ({
+          ...prev,
+          phoneNumber: "Phonenumber already used",
+        }));
+      }
+      if (err.response?.data?.message === "Mobile is invalid format") {
+        setInputError((prev) => ({
+          ...prev,
+          phoneNumber: "Mobile is invalid format",
+        }));
+      }
     }
+
+    setIsSubmit(true);
   };
+
+  useEffect(() => {
+    console.log(inputError);
+    if (Object.keys(inputError).length === 0 && isSubmit) {
+      console.log(input);
+    }
+  }, [inputError]);
 
   return (
     <form onSubmit={handleSubmitForm}>
@@ -57,7 +123,7 @@ function RegisterForm() {
             Firstname
           </label>
         </div>
-
+        <span className="text-red-600">{inputError.firstName}</span>
         <div className="relative">
           <input
             type="text"
@@ -75,7 +141,7 @@ function RegisterForm() {
             Lastname
           </label>
         </div>
-
+        <span className="text-red-600">{inputError.lastName}</span>
         <div className="relative">
           <input
             type="text"
@@ -93,6 +159,7 @@ function RegisterForm() {
             Email
           </label>
         </div>
+        <span className="text-red-600">{inputError.email}</span>
         <div className="relative">
           <input
             type="text"
@@ -110,7 +177,7 @@ function RegisterForm() {
             Phonenumber
           </label>
         </div>
-
+        <span className="text-red-600">{inputError.phoneNumber}</span>
         <div className="relative">
           <input
             type="password"
@@ -129,6 +196,7 @@ function RegisterForm() {
           </label>
           <i className="fa-regular fa-eye absolute top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer text-tin-color"></i>
         </div>
+        <span className="text-red-600">{inputError.password}</span>
         <div className="relative">
           <input
             type="password"
@@ -147,7 +215,7 @@ function RegisterForm() {
           </label>
           <i className="fa-regular fa-eye absolute top-1/2 -translate-y-1/2 right-0 mr-3 cursor-pointer text-tin-color"></i>
         </div>
-
+        <span className="text-red-600">{inputError.confirmPassword}</span>
         <button
           type="submit"
           className="w-full focus:outline-none text-white bg-vivid-orange hover:bg-mermaid-net focus:ring-2 focus:ring-vivid-orange font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-5 mb-2 "
