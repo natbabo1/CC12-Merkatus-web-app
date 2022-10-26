@@ -1,14 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import * as authService from "../api/authApi";
+import { useLoading } from "./LoadingContext";
 import {
   addAccessToken,
   getAccessToken,
-  removeAccessToken,
+  removeAccessToken
 } from "../utils/localStorage";
-import * as authService from "../api/authApi";
-import { toast } from "react-toastify";
+
 const AuthContext = createContext();
 
 function AuthContextProvider({ children }) {
+  const { startLoading, stopLoading } = useLoading();
+
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -19,9 +23,12 @@ function AuthContextProvider({ children }) {
         }
       } catch (err) {
         console.log(err);
+      } finally {
+        stopLoading();
       }
     };
 
+    startLoading();
     fetch();
   }, []);
 

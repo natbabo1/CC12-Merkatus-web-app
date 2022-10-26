@@ -2,23 +2,26 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
+import { useLoading } from "../../contexts/LoadingContext";
 import Avatar from "../../components/ui/Avatar";
 import ProductListing from "../../components/ui/ProductListing";
 import OrderHorizonCard from "../../components/ui/OrderHorizonCard";
 import ProductFilterMenu from "./ProductFilterMenu";
 import * as orderService from "../../api/orderApi";
+import listingNameCreate from "../../utils/listingName";
 import {
   BUYER,
   PAID,
   RECEIVED,
   TRANSFER,
   RATED,
-  ARRIVED,
-  SELLER
+  ARRIVED
 } from "../../utils/constaint";
 
 function BuyerDashboardContainer() {
   const navigate = useNavigate();
+
+  const { startLoading, stopLoading } = useLoading();
 
   const {
     user: { profileImage }
@@ -59,20 +62,7 @@ function BuyerDashboardContainer() {
       ""
     );
 
-  const listingName = useMemo(() => {
-    if (filter === PAID) {
-      return "สินค้าที่รอการจัดส่ง";
-    }
-    if (filter === TRANSFER) {
-      return "สินค้าที่รอการยืนยัน";
-    }
-    if (filter === RECEIVED) {
-      return "สินค้าที่รอการให้คะแนน";
-    }
-    if (filter === RATED) {
-      return "ประวัติการซื้อสินค้า";
-    }
-  }, [filter]);
+  const listingName = useMemo(() => listingNameCreate(filter), [filter]);
 
   const paidOrder = useMemo(
     () => toProductHorizonCard(orders.find((item) => item.status === PAID)),
@@ -108,6 +98,7 @@ function BuyerDashboardContainer() {
 
   useEffect(() => {
     const fetchOrders = async () => {
+      startLoading();
       try {
         const {
           data: { orders: newOrders }
@@ -117,6 +108,8 @@ function BuyerDashboardContainer() {
       } catch (err) {
         console.log(err);
         toast.error(err.resonse?.data?.message);
+      } finally {
+        stopLoading();
       }
     };
     fetchOrders();
