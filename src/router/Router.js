@@ -13,6 +13,7 @@ import SettingPage from "../pages/SettingPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import NotLoginPage from "../pages/NotLoginPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
 import { useAuth } from "../contexts/AuthContext";
 
 function Router() {
@@ -30,6 +31,7 @@ function Router() {
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
             <Route path="/address" element={<AddressEditPage />} />
+            <Route path="/password" element={<ChangePasswordPage />} />
             <Route path="/mycart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/selling" element={<SellingPage />} />
