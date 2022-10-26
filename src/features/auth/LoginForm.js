@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
+import { useLoading } from "../../contexts/LoadingContext";
 import { useModal } from "../../contexts/ModalContext";
 import RegisterForm from "../../features/auth/RegisterForm";
 
 function LoginForm() {
   const { openFormModal, closeModal } = useModal();
   const { login } = useAuth();
+  const { startLoading, stopLoading } = useLoading();
+
   const [input, setInput] = useState({
     email: "",
-    password: "",
+    password: ""
   });
 
   const handleChangeInput = (e) => {
@@ -18,7 +21,7 @@ function LoginForm() {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-
+    startLoading();
     try {
       await login(input);
       toast.success("success login");
@@ -26,6 +29,8 @@ function LoginForm() {
     } catch (err) {
       console.log(err);
       toast.error(err.response?.data?.message);
+    } finally {
+      stopLoading();
     }
   };
 

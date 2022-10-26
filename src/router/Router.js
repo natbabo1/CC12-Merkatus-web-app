@@ -12,22 +12,33 @@ import CartPage from "../pages/CartPage";
 import SettingPage from "../pages/SettingPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import NotLoginPage from "../pages/NotLoginPage";
+import { useAuth } from "../contexts/AuthContext";
 
 function Router() {
+  const { user } = useAuth();
+
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="selling" element={<SellingPage />} />
-        <Route path="buying" element={<BuyingPage />} />
         <Route path="product/:productId" element={<ProductPage />} />
-        <Route path="addproduct" element={<AddProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
-        <Route path="address" element={<AddressEditPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
         <Route path="setting" element={<SettingPage />} />
-        <Route path="mycart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
+        {user ? (
+          <>
+            <Route path="/addproduct" element={<AddProductPage />} />
+            <Route path="/address" element={<AddressEditPage />} />
+            <Route path="/mycart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/selling" element={<SellingPage />} />
+            <Route path="/buying" element={<BuyingPage />} />
+          </>
+        ) : (
+          <Route path="/*" element={<NotLoginPage />} />
+        )}
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
