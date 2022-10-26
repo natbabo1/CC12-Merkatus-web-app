@@ -1,5 +1,8 @@
 import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
+import { useCart } from "../../contexts/CartContext";
 function SellerCartGroup() {
+  const { cart } = useCart();
+  console.log(cart);
   return (
     <>
       <hr className="bg-mermaid-net border border-mermaid-net" />
