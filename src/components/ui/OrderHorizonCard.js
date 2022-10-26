@@ -1,5 +1,12 @@
 import { toBaht } from "../../utils/numberFormat";
-import { BUYER, PAID, TRANSFER, ARRIVED } from "../../utils/constaint";
+import {
+  BUYER,
+  PAID,
+  TRANSFER,
+  ARRIVED,
+  RECEIVED,
+  RATED
+} from "../../utils/constaint";
 import { orderButton } from "../../utils/buttonFormat";
 
 function OrderHorizonCard({ role, order, onClickButton }) {
@@ -42,7 +49,11 @@ function OrderHorizonCard({ role, order, onClickButton }) {
               type="radio"
               className="bg-vivid-orange border-0 checked:bg-vivid-orange mr-3 focus:ring-vivid-orange"
               name={order.id}
-              checked={order.status === ARRIVED}
+              checked={
+                order.status === ARRIVED ||
+                order.status === RECEIVED ||
+                order.status === RATED
+              }
               disabled
             />
             พัสดุถึงปลายทาง
