@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import Avatar from "../../components/ui/Avatar";
 import ProductListing from "../../components/ui/ProductListing";
-import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
+import OrderHorizonCard from "../../components/ui/OrderHorizonCard";
 import ProductFilterMenu from "./ProductFilterMenu";
 import * as orderService from "../../api/orderApi";
 import {
@@ -50,7 +50,7 @@ function BuyerDashboardContainer() {
 
   const toProductHorizonCard = (input) =>
     input ? (
-      <ProductHorizonCard
+      <OrderHorizonCard
         role={BUYER}
         order={input}
         onClickButton={() => onClickByStatus[input.status](input)}
@@ -93,7 +93,7 @@ function BuyerDashboardContainer() {
         if (item.status === filter) {
           return [
             ...acc,
-            <ProductHorizonCard
+            <OrderHorizonCard
               key={item.id}
               role={BUYER}
               order={item}
