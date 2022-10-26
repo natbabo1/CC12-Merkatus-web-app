@@ -20,7 +20,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="selling" element={<SellingPage />} />
         <Route path="buying" element={<BuyingPage />} />
-        <Route path="product" element={<ProductPage />} />
+        <Route path="product/:productId" element={<ProductPage />} />
         <Route path="addproduct" element={<AddProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="address" element={<AddressEditPage />} />
