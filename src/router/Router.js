@@ -27,9 +27,6 @@ function Router() {
         <Route path="product/:productId" element={<ProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
-        <Route path="setting" element={<SettingPage />} />
-        <Route path="/password" element={<ChangePasswordPage />} />
-        <Route path="/email" element={<ChangeEmailPage />} />
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
@@ -38,6 +35,9 @@ function Router() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/selling" element={<SellingPage />} />
             <Route path="/buying" element={<BuyingPage />} />
+            <Route path="setting" element={<SettingPage />} />
+            <Route path="/password" element={<ChangePasswordPage />} />
+            <Route path="/email" element={<ChangeEmailPage />} />
           </>
         ) : (
           <Route path="/*" element={<NotLoginPage />} />
