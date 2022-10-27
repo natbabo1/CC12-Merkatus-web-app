@@ -56,7 +56,7 @@ function RegisterForm() {
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "ConfirmPassword is required!";
-    } else if (values.password != values.confirmPassword) {
+    } else if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Password and ConfirmPassword does not match";
     }
     return errors;
@@ -103,7 +103,7 @@ function RegisterForm() {
     if (Object.keys(inputError).length === 0 && isSubmit) {
       console.log(input);
     }
-  }, [inputError]);
+  }, [inputError, input, isSubmit]);
 
   return (
     <form onSubmit={handleSubmitForm}>

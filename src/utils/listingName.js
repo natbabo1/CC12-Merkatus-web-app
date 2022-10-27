@@ -1,6 +1,6 @@
-import { PAID, RECEIVED, TRANSFER, RATED, ARRIVED } from "./constaint";
+import { PAID, RECEIVED, TRANSFER, RATED } from "./constaint";
 
-export default (filter) => {
+const listingNameCreate = (filter) => {
   if (filter === PAID) {
     return "สินค้าที่รอการจัดส่ง";
   }
@@ -14,3 +14,20 @@ export default (filter) => {
     return "ประวัติการซื้อสินค้า";
   }
 };
+
+const listingNameSeller = (filter) => {
+  if (filter === PAID) {
+    return "สินค้าที่ต้องจัดส่ง";
+  }
+  if (filter === TRANSFER) {
+    return "สินค้าที่รอการยืนยัน";
+  }
+  if (filter === RECEIVED) {
+    return "สินค้าที่ขายแล้ว";
+  }
+  if (filter === "ALLPRODUCT") {
+    return "รายการสินค้าทั้งหมด";
+  }
+};
+
+export { listingNameCreate, listingNameSeller };
