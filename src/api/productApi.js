@@ -6,3 +6,6 @@ export const getProductById = (id) => axios.get(`/product/${id}`);
 export const addProduct = (input) => axios.post("/users/product", input);
 export const getSuggestProducts = () => axios.get(`/product?limit=50`);
 export const getSellerProducts = () => axios.get("users/selling/products");
+
+export const getProductBySearch = (search) =>
+  axios.get(`/product?productName=${search}`);
