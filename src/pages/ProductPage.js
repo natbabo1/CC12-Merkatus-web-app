@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as productService from "../api/productApi";
+import * as cartService from "../api/cartApi";
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
@@ -17,6 +18,14 @@ function ProductPage() {
     };
     fetch();
   }, [productId]);
+  console.log(productId);
+  const handleAddProduct = async () => {
+    try {
+      const res = await cartService.createCartItem(productId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -52,7 +61,9 @@ function ProductPage() {
 
                   <div
                     className={`text-white flex items-center w-52 mt-10 justify-center bg-vivid-orange h-10 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net 
+                    
               }`}
+                    onClick={handleAddProduct}
                   >
                     เพิ่มสินค้าลงรถเข็น
                   </div>
