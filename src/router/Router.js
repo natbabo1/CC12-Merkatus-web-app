@@ -14,6 +14,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import NotLoginPage from "../pages/NotLoginPage";
 import { useAuth } from "../contexts/AuthContext";
+import SearchProductPage from "../pages/SearchProductPage";
 
 function Router() {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ function Router() {
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
         <Route path="setting" element={<SettingPage />} />
+        <Route path="search/:search" element={<SearchProductPage />} />
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
