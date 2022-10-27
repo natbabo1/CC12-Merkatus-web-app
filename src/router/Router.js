@@ -13,7 +13,9 @@ import SettingPage from "../pages/SettingPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import NotLoginPage from "../pages/NotLoginPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
 import { useAuth } from "../contexts/AuthContext";
+import ChangeEmailPage from "../pages/ChangeEmailPage";
 
 function Router() {
   const { user } = useAuth();
@@ -25,7 +27,6 @@ function Router() {
         <Route path="product/:productId" element={<ProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
-        <Route path="setting" element={<SettingPage />} />
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
@@ -34,6 +35,9 @@ function Router() {
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/selling" element={<SellingPage />} />
             <Route path="/buying" element={<BuyingPage />} />
+            <Route path="setting" element={<SettingPage />} />
+            <Route path="/password" element={<ChangePasswordPage />} />
+            <Route path="/email" element={<ChangeEmailPage />} />
           </>
         ) : (
           <Route path="/*" element={<NotLoginPage />} />
