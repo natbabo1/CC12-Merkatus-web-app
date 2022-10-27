@@ -1,12 +1,4 @@
-import {
-  ARRIVED,
-  BUYER,
-  PAID,
-  RATED,
-  RECEIVED,
-  SELLER,
-  TRANSFER
-} from "./constaint";
+import { ARRIVED, BUYER, PAID, RECEIVED, SELLER, TRANSFER } from "./constaint";
 
 export const orderButton = (role, status) => {
   if (role === BUYER) {

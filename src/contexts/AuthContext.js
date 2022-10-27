@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import * as authService from "../api/authApi";
 import { useLoading } from "./LoadingContext";
 import {
@@ -30,7 +29,7 @@ function AuthContextProvider({ children }) {
 
     startLoading();
     fetch();
-  }, []);
+  }, [startLoading, stopLoading]);
 
   const register = async (input) => {
     const res = await authService.register(input);

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
@@ -8,13 +8,12 @@ import ProductListing from "../../components/ui/ProductListing";
 import OrderHorizonCard from "../../components/ui/OrderHorizonCard";
 import ProductFilterMenu from "./ProductFilterMenu";
 import * as orderService from "../../api/orderApi";
-import listingNameCreate from "../../utils/listingName";
+import { listingNameCreate } from "../../utils/listingName";
 import {
   BUYER,
   PAID,
   RECEIVED,
   TRANSFER,
-  RATED,
   ARRIVED
 } from "../../utils/constaint";
 
@@ -30,51 +29,57 @@ function BuyerDashboardContainer() {
   const [orders, setOrders] = useState([]);
   const [filter, setFilter] = useState(null);
 
-  const confirmOrder = async (input) => {
+  const confirmOrder = useCallback(async (input) => {
     try {
       const {
         data: { order }
       } = await orderService.confirmOrder(input.id);
-      setOrders([
-        ...orders.map((item) => (item.id === order.id ? order : item))
+      setOrders((prev) => [
+        ...prev.map((item) => (item.id === order.id ? order : item))
       ]);
     } catch (err) {
       toast.error(err.response?.data?.message);
       console.log(err);
     }
-  };
+  }, []);
 
-  const onClickByStatus = {
-    [PAID]: (order) => navigate(`/product/${order.Product.id}`),
-    [TRANSFER]: confirmOrder,
-    [ARRIVED]: confirmOrder,
-    [RECEIVED]: null //function to rate the order
-  };
+  const onClickByStatus = useMemo(
+    () => ({
+      [PAID]: (order) => navigate(`/product/${order.Product.id}`),
+      [TRANSFER]: confirmOrder,
+      [ARRIVED]: confirmOrder,
+      [RECEIVED]: null //function to rate the order
+    }),
+    [confirmOrder, navigate]
+  );
 
-  const toProductHorizonCard = (input) =>
-    input ? (
-      <OrderHorizonCard
-        role={BUYER}
-        order={input}
-        onClickButton={() => onClickByStatus[input.status](input)}
-      />
-    ) : (
-      ""
-    );
+  const toProductHorizonCard = useCallback(
+    (input) =>
+      input ? (
+        <OrderHorizonCard
+          role={BUYER}
+          order={input}
+          onClickButton={() => onClickByStatus[input.status](input)}
+        />
+      ) : (
+        ""
+      ),
+    [onClickByStatus]
+  );
 
   const listingName = useMemo(() => listingNameCreate(filter), [filter]);
 
   const paidOrder = useMemo(
     () => toProductHorizonCard(orders.find((item) => item.status === PAID)),
-    [orders]
+    [orders, toProductHorizonCard]
   );
   const transferOrder = useMemo(
     () => toProductHorizonCard(orders.find((item) => item.status === TRANSFER)),
-    [orders]
+    [orders, toProductHorizonCard]
   );
   const receivedOrder = useMemo(
     () => toProductHorizonCard(orders.find((item) => item.status === RECEIVED)),
-    [orders]
+    [orders, toProductHorizonCard]
   );
 
   const filteredOrders = useMemo(
@@ -93,7 +98,7 @@ function BuyerDashboardContainer() {
         }
         return acc;
       }, []),
-    [filter, orders]
+    [filter, orders, onClickByStatus]
   );
 
   useEffect(() => {
@@ -113,7 +118,7 @@ function BuyerDashboardContainer() {
       }
     };
     fetchOrders();
-  }, []);
+  }, [startLoading, stopLoading]);
 
   return (
     <div className="flex flex-col min-h-screen pt-10">
