@@ -1,8 +1,12 @@
+import { useRef } from "react";
 import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
 import { useCart } from "../../contexts/CartContext";
 
 function SellerCartGroup({ cartItem }) {
   const { handleOnCheckbox } = useCart();
+
+  const checkBox = useRef();
+
   return (
     <>
       <hr className="bg-mermaid-net border border-mermaid-net" />
@@ -13,8 +17,12 @@ function SellerCartGroup({ cartItem }) {
               type="checkbox"
               className="border-vivid-orange checked:bg-vivid-orange focus:ring-vivid-orange"
               onChange={(e) => handleOnCheckbox(e, cartItem)}
+              ref={checkBox}
             />
-            <ProductHorizonCard cartItem={cartItem} />
+            <ProductHorizonCard
+              cartItem={cartItem}
+              isCheck={checkBox.current?.checked}
+            />
           </div>
         </div>
       </div>
