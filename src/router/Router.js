@@ -12,22 +12,39 @@ import CartPage from "../pages/CartPage";
 import SettingPage from "../pages/SettingPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
+import NotLoginPage from "../pages/NotLoginPage";
+import ChangePasswordPage from "../pages/ChangePasswordPage";
+import { useAuth } from "../contexts/AuthContext";
+import ChangeEmailPage from "../pages/ChangeEmailPage";
+import SearchProductPage from "../pages/SearchProductPage";
 
 function Router() {
+  const { user } = useAuth();
+
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="selling" element={<SellingPage />} />
-        <Route path="buying" element={<BuyingPage />} />
         <Route path="product/:productId" element={<ProductPage />} />
-        <Route path="addproduct" element={<AddProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
-        <Route path="address" element={<AddressEditPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
-        <Route path="setting" element={<SettingPage />} />
-        <Route path="mycart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
+        <Route path="search/:search" element={<SearchProductPage />} />
+        {user ? (
+          <>
+            <Route path="/addproduct" element={<AddProductPage />} />
+            <Route path="/address" element={<AddressEditPage />} />
+            <Route path="/mycart" element={<CartPage />} />
+            <Route path="/checkout" element={<CheckoutPage />} />
+            <Route path="/selling" element={<SellingPage />} />
+            <Route path="/buying" element={<BuyingPage />} />
+            <Route path="setting" element={<SettingPage />} />
+            <Route path="/password" element={<ChangePasswordPage />} />
+            <Route path="/email" element={<ChangeEmailPage />} />
+          </>
+        ) : (
+          <Route path="/*" element={<NotLoginPage />} />
+        )}
+
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

@@ -18,7 +18,6 @@ function ProductPage() {
     };
     fetch();
   }, [productId]);
-  console.log(productId);
   const handleAddProduct = async () => {
     try {
       const res = await cartService.createCartItem(productId);
@@ -26,7 +25,7 @@ function ProductPage() {
       console.log(err);
     }
   };
-
+  console.log(product);
   return (
     <>
       {product ? (
@@ -83,19 +82,17 @@ function ProductPage() {
             <div className="flex flex-col w-1/2 h-40 items-center justify-center">
               <div className="w-4/5 h-full flex items-center justify-between gap-4 ">
                 <img
-                  src={
-                    "https://cf.shopee.co.th/file/fb363c0cf56daa44a6cca5f905cdfa30_tn"
-                  }
+                  src={product.Extraimages[0].image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />
                 <img
-                  src="https://cf.shopee.co.th/file/fb363c0cf56daa44a6cca5f905cdfa30_tn"
+                  src={product.Extraimages[1].image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />
                 <img
-                  src="https://cf.shopee.co.th/file/fb363c0cf56daa44a6cca5f905cdfa30_tn"
+                  src={product.Extraimages[2].image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />

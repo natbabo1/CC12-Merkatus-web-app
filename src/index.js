@@ -8,16 +8,19 @@ import ModalContextProvider from "./contexts/ModalContext";
 import AuthContextProvider from "./contexts/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
 import CartContextProvider from "./contexts/CartContext";
+import LoadingContextProvider from "./contexts/LoadingContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <AuthContextProvider>
-      <ModalContextProvider>
-        <CartContextProvider>
-          <App />
-        </CartContextProvider>
-      </ModalContextProvider>
-    </AuthContextProvider>
+    <LoadingContextProvider>
+      <AuthContextProvider>
+        <ModalContextProvider>
+          <CartContextProvider>
+            <App />
+          </CartContextProvider>
+        </ModalContextProvider>
+      </AuthContextProvider>
+    </LoadingContextProvider>
   </BrowserRouter>
 );
 

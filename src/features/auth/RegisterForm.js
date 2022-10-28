@@ -2,17 +2,20 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { toast } from "react-toastify";
 import { useModal } from "../../contexts/ModalContext";
+import { useLoading } from "../../contexts/LoadingContext";
 
 function RegisterForm() {
   const { closeModal } = useModal();
   const { register } = useAuth();
+  const { startLoading, stopLoading } = useLoading();
+
   const initialValues = {
     firstName: "",
     lastName: "",
     password: "",
     confirmPassword: "",
     email: "",
-    phoneNumber: "",
+    phoneNumber: ""
   };
   const [input, setInput] = useState(initialValues);
   const [inputError, setInputError] = useState({});
@@ -53,13 +56,14 @@ function RegisterForm() {
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "ConfirmPassword is required!";
-    } else if (values.password != values.confirmPassword) {
+    } else if (values.password !== values.confirmPassword) {
       errors.confirmPassword = "Password and ConfirmPassword does not match";
     }
     return errors;
   };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+    startLoading();
     setInputError({});
     const errorsN = validate(input);
     if (Object.keys(errorsN).length > 0) {
@@ -78,15 +82,17 @@ function RegisterForm() {
       if (err.response?.data?.message === "phone_number must be unique") {
         setInputError((prev) => ({
           ...prev,
-          phoneNumber: "Phonenumber already used",
+          phoneNumber: "Phonenumber already used"
         }));
       }
       if (err.response?.data?.message === "Mobile is invalid format") {
         setInputError((prev) => ({
           ...prev,
-          phoneNumber: "Mobile is invalid format",
+          phoneNumber: "Mobile is invalid format"
         }));
       }
+    } finally {
+      stopLoading();
     }
 
     setIsSubmit(true);
@@ -97,7 +103,7 @@ function RegisterForm() {
     if (Object.keys(inputError).length === 0 && isSubmit) {
       console.log(input);
     }
-  }, [inputError]);
+  }, [inputError, input, isSubmit]);
 
   return (
     <form onSubmit={handleSubmitForm}>

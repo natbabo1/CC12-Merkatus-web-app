@@ -1,12 +1,25 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+// import * as productService from "../../api/productApi";
+// import ProductCard from "../../components/ui/ProductCard";
+// import SearchProductPage from "../../pages/SearchProductPage";
+
 function SearchBar() {
+  const [search, setSearch] = useState("");
+  // const [searchProduct, setSearchProduct] = useState([]);
+  const navigate = useNavigate();
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${search}`);
+  };
+
   return (
-    <form className="grow ml-5 mr-10">
-      <label
-        htmlFor="default-search"
-        className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-      >
-        Search
-      </label>
+    <form className="row grow ml-5 mr-10" onSubmit={handleSearchSubmit}>
       <div className="relative">
         <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
           <svg
@@ -16,21 +29,19 @@ function SearchBar() {
             stroke="currentColor"
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
+          ></svg>
         </div>
         <input
-          type="search"
+          type="text"
+          name="search"
           id="default-search"
-          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-full border border-vivid-orange focus:ring-vivid-orange focus:border-vivid-orange dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
-          placeholder="Search Mockups, Logos..."
+          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-full border border-vivid-orange focus:ring-vivid-orange focus:border-vivid-orange"
+          placeholder="Search Product"
+          onChange={handleSearchChange}
         />
+      </div>
+      <div className="w-[86%] flex items-center mx-auto">
+        <div className="flex flex-wrap py-2 justify-center gap-x-4 gap-y-6"></div>
       </div>
     </form>
   );
