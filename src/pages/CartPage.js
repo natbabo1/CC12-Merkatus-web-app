@@ -9,7 +9,7 @@ function CartPage() {
     if (user) {
       fetch();
     }
-  }, []);
+  }, [fetch, user]);
   return <CartContainer />;
 }
 

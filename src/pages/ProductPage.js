@@ -20,7 +20,7 @@ function ProductPage() {
   }, [productId]);
   const handleAddProduct = async () => {
     try {
-      const res = await cartService.createCartItem(productId);
+      await cartService.createCartItem(productId);
     } catch (err) {
       console.log(err);
     }
