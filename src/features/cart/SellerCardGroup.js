@@ -1,4 +1,4 @@
-import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
+import ProductDashBoardCard from "../../components/ui/ProductDashBoardCard";
 function SellerCartGroup() {
   return (
     <>
@@ -18,21 +18,21 @@ function SellerCartGroup() {
               type="checkbox"
               className="border-vivid-orange checked:bg-vivid-orange focus:ring-vivid-orange"
             />
-            <ProductHorizonCard />
+            <ProductDashBoardCard />
           </div>
           <div className="flex items-center justify-start gap-10">
             <input
               type="checkbox"
               className="border-vivid-orange checked:bg-vivid-orange focus:ring-vivid-orange"
             />
-            <ProductHorizonCard />
+            <ProductDashBoardCard />
           </div>
           <div className="flex items-center justify-start gap-10">
             <input
               type="checkbox"
               className="border-vivid-orange checked:bg-vivid-orange focus:ring-vivid-orange"
             />
-            <ProductHorizonCard />
+            <ProductDashBoardCard />
           </div>
         </div>
       </div>
