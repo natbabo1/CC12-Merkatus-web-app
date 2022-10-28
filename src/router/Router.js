@@ -6,6 +6,7 @@ import BuyingPage from "../pages/BuyingPage";
 import ProductPage from "../pages/ProductPage";
 import CategoryPage from "../pages/CategoryPage";
 import SellerProfilePage from "../pages/SellerProfilePage";
+import AdminDashboard from "../pages/AdminDashboard";
 import AddressEditPage from "../pages/AddressEditPage";
 import AddProductPage from "../pages/AddProductPage";
 import CartPage from "../pages/CartPage";
@@ -27,6 +28,7 @@ function Router() {
         <Route path="product/:productId" element={<ProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
+        <Route path="admin" element={<AdminDashboard />} />
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />

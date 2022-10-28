@@ -5,7 +5,7 @@ import {
   TRANSFER,
   ARRIVED,
   RECEIVED,
-  RATED
+  RATED,
 } from "../../utils/constaint";
 import { orderButton } from "../../utils/buttonFormat";
 
