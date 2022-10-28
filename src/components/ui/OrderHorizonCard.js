@@ -1,6 +1,5 @@
 import { toBaht } from "../../utils/numberFormat";
 import {
-  BUYER,
   PAID,
   TRANSFER,
   ARRIVED,
@@ -13,7 +12,7 @@ function OrderHorizonCard({ role, order, onClickButton }) {
   const buttonType = orderButton(role, order.status);
 
   return (
-    <div className="bg-vivid-orange/30 flex rounded-3xl h-40 py-5 pl-5 pr-10 grow">
+    <div className="bg-vivid-orange/30 flex rounded-3xl h-40 py-5 pl-5 pr-10 grow mb-2">
       <img
         className="rounded-md mr-8 w-"
         src={order.Product.image}
@@ -59,7 +58,7 @@ function OrderHorizonCard({ role, order, onClickButton }) {
             พัสดุถึงปลายทาง
           </label>
         </div>
-        <div className="h-6">
+        {/* <div className="h-6">
           {role === BUYER ? (
             " "
           ) : (
@@ -68,7 +67,7 @@ function OrderHorizonCard({ role, order, onClickButton }) {
               <span className="font-bold">5 Wish list</span>
             </>
           )}
-        </div>
+        </div> */}
       </div>
       <div className="flex flex-col justify-end grow ml-4">
         <div

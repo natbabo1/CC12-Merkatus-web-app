@@ -7,6 +7,7 @@ import App from "./App";
 import ModalContextProvider from "./contexts/ModalContext";
 import AuthContextProvider from "./contexts/AuthContext";
 import "react-toastify/dist/ReactToastify.css";
+import CartContextProvider from "./contexts/CartContext";
 import LoadingContextProvider from "./contexts/LoadingContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <LoadingContextProvider>
       <AuthContextProvider>
         <ModalContextProvider>
-          <App />
+          <CartContextProvider>
+            <App />
+          </CartContextProvider>
         </ModalContextProvider>
       </AuthContextProvider>
     </LoadingContextProvider>
