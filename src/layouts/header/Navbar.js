@@ -10,10 +10,12 @@ import LoginIcon from "../../components/icon/LoginIcon";
 import UserDropdown from "./UserDropdown";
 import { useAuth } from "../../contexts/AuthContext";
 import Avatar from "../../components/ui/Avatar";
+import { useCart } from "../../contexts/CartContext";
 
 function Navbar() {
   const { openFormModal } = useModal();
   const { user } = useAuth();
+  const { totalCartItems } = useCart();
 
   const [openDropdown, setOpenDropdown] = useState(false);
   const dropdown = useRef();
@@ -45,8 +47,13 @@ function Navbar() {
               <div className="w-12">
                 <ChatIcon />
               </div>
-              <Link to="/mycart" className="w-12">
+              <Link to="/mycart" className="w-12 relative">
                 <KartIcon />
+                {totalCartItems > 0 ? (
+                  <div className="absolute bg-mermaid-net rounded-full h-6 w-fit px-2 text-center text-white top-0 right-0 translate-x-1/3 -translate-y-1/3">
+                    {totalCartItems}
+                  </div>
+                ) : null}
               </Link>
               {user ? (
                 <div
