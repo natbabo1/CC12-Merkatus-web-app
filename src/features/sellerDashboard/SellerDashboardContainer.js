@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useModal } from "../../contexts/ModalContext";
 import { useLoading } from "../../contexts/LoadingContext";
 import Avatar from "../../components/ui/Avatar";
-import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
+import ProductDashBoardCard from "../../components/ui/ProductDashBoardCard";
 import OrderHorizonCard from "../../components/ui/OrderHorizonCard";
 import ProductListing from "../../components/ui/ProductListing";
 import DashboardGroup from "./DashboardGroup";
@@ -186,9 +186,7 @@ function SellerDashboardContainer() {
                 onReturn={() => setFilter(null)}
               />
               {filter === "ALLPRODUCT" ? (
-                products.map((item) => (
-                  <ProductHorizonCard product={item} viewOnly={true} />
-                ))
+                products.map((item) => <ProductDashBoardCard product={item} />)
               ) : filteredOrders.length > 0 ? (
                 filteredOrders
               ) : (
@@ -205,7 +203,7 @@ function SellerDashboardContainer() {
                 onViewAll={() => setFilter("ALLPRODUCT")}
               />
               {products.length > 0 ? (
-                <ProductHorizonCard product={products[0]} viewOnly={true} />
+                <ProductDashBoardCard product={products[0]} />
               ) : (
                 <h3 className="font-semibold text-tin-color ml-12 mt-6">
                   ไม่มีรายการ
