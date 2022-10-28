@@ -8,7 +8,6 @@ function ProductHorizonCard({ cartItem }) {
 
   const handleAddProduct = async () => {
     const newInputCount = count + 1;
-    console.log(newInputCount);
     setCount((prev) => prev + 1);
     try {
       await updateCart({ cartId: cartItem.id, count: newInputCount });

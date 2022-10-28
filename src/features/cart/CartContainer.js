@@ -1,7 +1,20 @@
 import SellerCartGroup from "./SellerCardGroup";
 import { useCart } from "../../contexts/CartContext";
+import { useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 function CartContainer() {
-  const { cart } = useCart();
+  const { user } = useAuth();
+  const { cart, fetch, clearCheckoutItems } = useCart();
+
+  useEffect(() => {
+    if (user) {
+      fetch();
+    }
+
+    return () => {
+      clearCheckoutItems();
+    };
+  }, [clearCheckoutItems, fetch, user]);
 
   return (
     <form className="w-full min-h-screen">

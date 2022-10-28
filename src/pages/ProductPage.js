@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Avatar from "../components/ui/Avatar";
 import * as productService from "../api/productApi";
 import * as cartService from "../api/cartApi";
+import { useCart } from "../contexts/CartContext";
 
 function ProductPage() {
+  const { handleCart } = useCart();
+
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -18,14 +23,15 @@ function ProductPage() {
     };
     fetch();
   }, [productId]);
+
   const handleAddProduct = async () => {
     try {
-      await cartService.createCartItem(productId);
+      const res = await cartService.createCartItem(productId);
+      handleCart((prev) => [...prev, res.data.cart]);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(product);
   return (
     <>
       {product ? (
@@ -82,48 +88,42 @@ function ProductPage() {
             <div className="flex flex-col w-1/2 h-40 items-center justify-center">
               <div className="w-4/5 h-full flex items-center justify-between gap-4 ">
                 <img
-                  src={product.Extraimages[0].image}
+                  src={product.Extraimages[0]?.image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />
                 <img
-                  src={product.Extraimages[1].image}
+                  src={product.Extraimages[1]?.image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />
                 <img
-                  src={product.Extraimages[2].image}
+                  src={product.Extraimages[2]?.image}
                   className="block w-1/4 grow rounded-lg"
                   alt="Product"
                 />
               </div>
             </div>
             <div className="w-1/2 flex justify-center">
-              <div className="bg-vivid-orange w-[90%] flex rounded-3xl h-40 py-5 pl-5 pr-10">
-                <div className="w-1/2 flex">
+              <div className="bg-vivid-orange w-[90%] flex items-center rounded-3xl h-40 py-5 pl-5 pr-10">
+                <div className="w-1/2 flex items-center">
                   <div className="w-1/2 h-full">
-                    <img
-                      className="rounded-md h-full w-full"
-                      src={product.Seller.profileImage}
-                      alt="Product"
-                    />
+                    <Avatar src={product.Seller.profileImage} />
                   </div>
-                  <div className="w-1/2 h-full flex flex-col justify-between items-center">
+                  <div className="w-1/2 h-full flex flex-col justify-between items-center gap-y-3">
                     <div
-                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net 
-              }`}
+                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net`}
                     >
                       แชทเลย
                     </div>
                     <div
-                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net 
-              }`}
+                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net`}
                     >
                       ดูร้านค้า
                     </div>
                   </div>
                 </div>
-                <div className="w-1/2 border-l-2 border-white">
+                <div className="w-1/2 border-l-2 border-white h-full">
                   <p className="text-white pl-4">Rating</p>
                 </div>
               </div>
