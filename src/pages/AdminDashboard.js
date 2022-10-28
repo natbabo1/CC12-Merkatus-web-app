@@ -18,7 +18,13 @@ function AdminDashboard() {
       <div className="flex w-full ">
         <div className="w-40"></div>
         <div className="grow border pl-20 mt-4">
-          <ProductListing title="คำขอถอนเงิน" />
+          <ProductListing title="คำขอถอนเงิน" more={true} />
+          <AdminHorizon />
+          <ProductListing title="ที่กำลังดำเนินการ" more={true} />
+          <AdminHorizon />
+          <ProductListing title="ที่ถูกปฏิเสธ" more={true} />
+          <AdminHorizon />
+          <ProductListing title="ที่เสร็จสิ้น" more={true} />
           <AdminHorizon />
         </div>
       </div>
