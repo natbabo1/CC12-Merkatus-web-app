@@ -4,7 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState
+  useState,
 } from "react";
 import * as cartService from "../api/cartApi";
 import { useAuth } from "./AuthContext";
@@ -42,7 +42,7 @@ function CartContextProvider({ children }) {
   const fetch = useCallback(async () => {
     try {
       const res = await cartService.getMyCart();
-      console.log("fetch fn");
+
       setCart(res.data.carts);
     } catch (err) {
       console.log(err);
@@ -82,7 +82,8 @@ function CartContextProvider({ children }) {
         handleCart,
         totalCartItems,
         handleOnCheckbox,
-        clearCheckoutItems
+        clearCheckoutItems,
+        checkoutItems,
       }}
     >
       {children}
