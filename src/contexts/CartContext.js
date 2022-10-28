@@ -8,16 +8,16 @@ function CartContextProvider({ children }) {
   const { user } = useAuth();
   const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        const res = await cartService.getMyCart();
+  const fetch = async () => {
+    try {
+      const res = await cartService.getMyCart();
 
-        setCart(res.data.carts);
-      } catch (err) {
-        console.log(err);
-      }
-    };
+      setCart(res.data.carts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
     if (user) {
       fetch();
     }
@@ -35,8 +35,14 @@ function CartContextProvider({ children }) {
     await cartService.deleteCartItem(input);
   };
 
+  const handleCart = (input) => {
+    setCart(input);
+  };
+
   return (
-    <CartContext.Provider value={{ cart, setCart, updateCart, deleteCartItem }}>
+    <CartContext.Provider
+      value={{ cart, setCart, updateCart, deleteCartItem, fetch, handleCart }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -3,7 +3,7 @@ import { toBaht } from "../../utils/numberFormat";
 import { useState } from "react";
 
 function ProductHorizonCard({ cartItem }) {
-  const { updateCart, deleteCartItem } = useCart();
+  const { updateCart, deleteCartItem, cart, handleCart } = useCart();
   const [count, setCount] = useState(cartItem.count);
 
   const handleAddProduct = async () => {
@@ -17,11 +17,17 @@ function ProductHorizonCard({ cartItem }) {
     }
   };
 
+  const handleDeleteProduct = () => {
+    const newCart = cart.filter((item) => item.id !== cartItem.id);
+    handleCart(newCart);
+  };
+
   const handleDecreaseProduct = async () => {
     const newInputCount = count - 1;
 
     try {
-      if (count == 1) {
+      if (count === 1) {
+        handleDeleteProduct();
         return await deleteCartItem({ cartId: cartItem.id });
       }
       setCount((prev) => prev - 1);
