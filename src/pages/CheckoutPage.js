@@ -6,17 +6,29 @@ import CheckoutCard from "../components/ui/CheckoutCard";
 import { useCart } from "../contexts/CartContext";
 import CreditCard from "../features/payment/Creditcard";
 
-function CheckoutPage() {
-  const { checkoutItems } = useCart();
+function CheckoutPage({ backToCart }) {
+  const { checkoutItems, clearCheckoutItems } = useCart();
 
   const totalAmount = checkoutItems.reduce(
     (sum, item) => sum + item.Product.unitPrice * item.count,
     0
   );
 
+  const handleClick = () => {
+    clearCheckoutItems();
+    backToCart();
+  };
+
   return (
-    <>
-      <form className="w-full min-h-screen flex flex-col justify-between  border-t-2 border-mermaid-net">
+    <div className="w-full border-t-2 border-mermaid-net">
+      <div
+        className="flex items-center cursor-pointer w-32"
+        onClick={handleClick}
+      >
+        <i className="fa fa-arrow-left text-vivid-orange text-3xl mr-3" />
+        <span>ย้อนกลับ</span>
+      </div>
+      <form className="w-full min-h-screen flex flex-col justify-between">
         <div className="w-3/4 mx-auto">
           <div className="flex">
             <div className="mt-4">
@@ -106,7 +118,7 @@ function CheckoutPage() {
           <CreditCard totalAmount={(totalAmount * 100).toString()} />
         </div>
       </form>
-    </>
+    </div>
   );
 }
 

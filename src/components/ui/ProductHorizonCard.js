@@ -1,13 +1,15 @@
 import { useCart } from "../../contexts/CartContext";
 import { toBaht } from "../../utils/numberFormat";
-
-function ProductHorizonCard({ cartItem, idx, isCheck }) {
+import { toast } from "react-toastify";
+function ProductHorizonCard({ cartItem, isCheck }) {
   const { updateCart, deleteCartItem, cart, handleCart } = useCart();
-  // const [count, setCount] = useState(cartItem.count);
 
   const handleAddProduct = async () => {
+    if (cartItem.count === cartItem.Product.stock) {
+      return toast.error("จำนวนสินค้าในคลังไม่เพียงพอ");
+    }
     const newInputCount = cartItem.count + 1;
-    // setCount((prev) => prev + 1);
+
     handleCart(
       cart.map((item) =>
         item.id === cartItem.id ? { ...item, count: newInputCount } : item
@@ -33,7 +35,7 @@ function ProductHorizonCard({ cartItem, idx, isCheck }) {
         handleDeleteProduct();
         return await deleteCartItem({ cartId: cartItem.id });
       }
-      // setCount((prev) => prev - 1);
+
       handleCart(
         cart.map((item) =>
           item.id === cartItem.id ? { ...item, count: newInputCount } : item
@@ -54,6 +56,11 @@ function ProductHorizonCard({ cartItem, idx, isCheck }) {
       />
       <div className="grow-[2] flex flex-col justify-between">
         <h4 className="block font-semibold">{cartItem.Product.productName}</h4>
+        <div>
+          {toBaht(cartItem.Product.unitPrice)} จำนวนสินค้าในคลัง :{" "}
+          {cartItem.Product.stock}
+        </div>
+
         <div className="flex items-center gap-x-4">
           {isCheck ? null : (
             <div
@@ -77,7 +84,7 @@ function ProductHorizonCard({ cartItem, idx, isCheck }) {
           <h4 className="text-tin-color mb-2 mt-2"> ชิ้น</h4>
         </div>
         <h4 className="block font-bold mb-2">
-          {toBaht(cartItem.Product.unitPrice)}
+          {toBaht(cartItem.Product.unitPrice * cartItem.count)}
         </h4>
       </div>
     </div>
