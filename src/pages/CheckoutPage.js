@@ -4,6 +4,7 @@ import CreditIcon from "../components/icon/CreditIcon";
 import LinePayIcon from "../components/icon/LinePayIcon";
 import CheckoutCard from "../components/ui/CheckoutCard";
 import { useCart } from "../contexts/CartContext";
+import CreditCard from "../features/payment/Creditcard";
 
 function CheckoutPage() {
   const { checkoutItems } = useCart();
@@ -101,9 +102,8 @@ function CheckoutPage() {
               {totalAmount} บาท
             </span>
           </div>
-          <button className="bg-vivid-orange text-white py-2 px-14 rounded-xl">
-            ชำระเงิน
-          </button>
+
+          <CreditCard totalAmount={(totalAmount * 100).toString()} />
         </div>
       </form>
     </>

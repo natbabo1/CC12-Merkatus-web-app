@@ -7,8 +7,8 @@ function CartContainer({ checkout }) {
   return (
     <div className="w-full min-h-screen">
       <div className="w-3/4 mx-auto">
-        {cart?.map((item) => (
-          <SellerCartGroup key={item.id} cartItem={item} />
+        {cart?.map((item, index) => (
+          <SellerCartGroup key={item.id} idx={index} cartItem={item} />
         ))}
       </div>
       <div className="flex justify-end items-center w-full bg-vivid-orange/40 px-10 py-4 rounded-lg">
