@@ -1,14 +1,18 @@
 import { useCart } from "../../contexts/CartContext";
 import { toBaht } from "../../utils/numberFormat";
-import { useState } from "react";
 
-function ProductHorizonCard({ cartItem, isCheck }) {
+function ProductHorizonCard({ cartItem, idx, isCheck }) {
   const { updateCart, deleteCartItem, cart, handleCart } = useCart();
-  const [count, setCount] = useState(cartItem.count);
+  // const [count, setCount] = useState(cartItem.count);
 
   const handleAddProduct = async () => {
-    const newInputCount = count + 1;
-    setCount((prev) => prev + 1);
+    const newInputCount = cartItem.count + 1;
+    // setCount((prev) => prev + 1);
+    handleCart(
+      cart.map((item) =>
+        item.id === cartItem.id ? { ...item, count: newInputCount } : item
+      )
+    );
     try {
       await updateCart({ cartId: cartItem.id, count: newInputCount });
     } catch (err) {
@@ -22,14 +26,19 @@ function ProductHorizonCard({ cartItem, isCheck }) {
   };
 
   const handleDecreaseProduct = async () => {
-    const newInputCount = count - 1;
+    const newInputCount = cartItem.count - 1;
 
     try {
-      if (count === 1) {
+      if (cartItem.count === 1) {
         handleDeleteProduct();
         return await deleteCartItem({ cartId: cartItem.id });
       }
-      setCount((prev) => prev - 1);
+      // setCount((prev) => prev - 1);
+      handleCart(
+        cart.map((item) =>
+          item.id === cartItem.id ? { ...item, count: newInputCount } : item
+        )
+      );
       await updateCart({ cartId: cartItem.id, count: newInputCount });
     } catch (err) {
       console.log(err);
@@ -55,7 +64,7 @@ function ProductHorizonCard({ cartItem, isCheck }) {
             </div>
           )}
 
-          <div className="w-10 rounded-md pl-3">{count}</div>
+          <div className="w-10 rounded-md pl-3">{cartItem.count}</div>
           {isCheck ? null : (
             <div
               className="w-4 h-4 bg-vivid-orange text-white flex justify-center items-center rounded-md"

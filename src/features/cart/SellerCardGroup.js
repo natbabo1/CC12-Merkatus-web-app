@@ -2,7 +2,7 @@ import { useRef } from "react";
 import ProductHorizonCard from "../../components/ui/ProductHorizonCard";
 import { useCart } from "../../contexts/CartContext";
 
-function SellerCartGroup({ cartItem }) {
+function SellerCartGroup({ cartItem, idx }) {
   const { handleOnCheckbox } = useCart();
 
   const checkBox = useRef();
@@ -21,6 +21,7 @@ function SellerCartGroup({ cartItem }) {
             />
             <ProductHorizonCard
               cartItem={cartItem}
+              idx={idx}
               isCheck={checkBox.current?.checked}
             />
           </div>

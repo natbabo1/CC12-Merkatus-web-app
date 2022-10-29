@@ -4,7 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from "react";
 import * as cartService from "../api/cartApi";
 import { useAuth } from "./AuthContext";
@@ -83,7 +83,7 @@ function CartContextProvider({ children }) {
         totalCartItems,
         handleOnCheckbox,
         clearCheckoutItems,
-        checkoutItems,
+        checkoutItems
       }}
     >
       {children}
