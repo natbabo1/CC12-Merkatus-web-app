@@ -1,8 +1,13 @@
-import * as paymentService from "../../api/paymentApi";
+import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
+import * as paymentService from "../../api/paymentApi";
+import * as orderService from "../../api/orderApi";
 
 function CreditCard({ totalAmount }) {
   const { user } = useAuth();
+  const { checkoutItems } = useCart();
+
   let OmiseCard;
 
   OmiseCard = window.OmiseCard;
@@ -23,43 +28,53 @@ function CreditCard({ totalAmount }) {
     OmiseCard.attach();
   };
 
-  const omiseCardHandler = () => {
+  const omiseCardHandler = (payInId, verifiedCheckoutItems) => {
     OmiseCard.open({
       amount: totalAmount,
       onCreateTokenSuccess: async (token) => {
-        await paymentService.payment({
+        const res = await paymentService.payment({
           email: user.email,
           name: user.firstName,
           amount: totalAmount,
           token: token,
-          headers: {
-            "Content-Type": "application/json"
-          }
+          payInId,
+          verifiedCheckoutItems
         });
+
+        console.log(res.data);
       },
 
       onFormClosed: () => {}
     });
   };
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    creditCardConfigure();
-    omiseCardHandler();
+    try {
+      const {
+        data: { payInId, verifiedCheckoutItems }
+      } = await orderService.makingPurchase({
+        totalAmount,
+        checkoutItems
+      });
+      creditCardConfigure();
+      omiseCardHandler(payInId, verifiedCheckoutItems);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response?.data?.message);
+    }
   };
 
   return (
     <div>
-      <form>
-        <button
-          className="bg-vivid-orange text-white py-2 px-14 rounded-xl"
-          id="credit-card"
-          type="button"
-          onClick={handleClick}
-        >
-          ชำระเงิน
-        </button>
-      </form>
+      <button
+        className="bg-vivid-orange text-white py-2 px-14 rounded-xl"
+        id="credit-card"
+        type="button"
+        onClick={handleClick}
+      >
+        ชำระเงิน
+      </button>
     </div>
   );
 }

@@ -7,9 +7,11 @@ function CartPage() {
   const { user } = useAuth();
   const { fetch, clearCheckoutItems } = useCart();
   const [isCheckout, setIsCheckout] = useState(false);
+
   const checkout = () => {
     setIsCheckout(true);
   };
+
   useEffect(() => {
     if (user) {
       fetch();

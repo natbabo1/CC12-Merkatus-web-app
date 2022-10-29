@@ -5,6 +5,7 @@ import LinePayIcon from "../components/icon/LinePayIcon";
 import CheckoutCard from "../components/ui/CheckoutCard";
 import { useCart } from "../contexts/CartContext";
 import CreditCard from "../features/payment/Creditcard";
+import { toComma } from "../utils/numberFormat";
 
 function CheckoutPage() {
   const { checkoutItems } = useCart();
@@ -99,7 +100,7 @@ function CheckoutPage() {
           <div className="flex items-center text-vivid-orange font-semibold mr-14">
             ราคารวมทั้งหมด
             <span className="flex items-center text-black text-xl ml-3">
-              {totalAmount} บาท
+              {toComma(totalAmount)} บาท
             </span>
           </div>
 

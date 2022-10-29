@@ -4,3 +4,5 @@ export const toBaht = (input) =>
     currency: "THB",
     maximumFractionDigits: 0
   }).format(+input);
+
+export const toComma = (input) => new Intl.NumberFormat("th-TH").format(+input);
