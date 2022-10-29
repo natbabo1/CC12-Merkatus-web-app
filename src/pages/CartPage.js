@@ -10,6 +10,11 @@ function CartPage() {
   const checkout = () => {
     setIsCheckout(true);
   };
+
+  const backToCart = () => {
+    setIsCheckout(false);
+  };
+
   useEffect(() => {
     if (user) {
       fetch();
@@ -20,7 +25,13 @@ function CartPage() {
     };
   }, [clearCheckoutItems, fetch, user]);
   return (
-    <>{isCheckout ? <CheckoutPage /> : <CartContainer checkout={checkout} />}</>
+    <>
+      {isCheckout ? (
+        <CheckoutPage backToCart={backToCart} />
+      ) : (
+        <CartContainer checkout={checkout} />
+      )}
+    </>
   );
 }
 
