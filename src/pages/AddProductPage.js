@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as categoryService from "../api/categoryApi";
 import * as productService from "../api/productApi";
@@ -11,10 +12,11 @@ function AddProductPage() {
   const [image2, setImage2] = useState(null);
   const [image3, setImage3] = useState(null);
   const [image4, setImage4] = useState(null);
-  // const [image, setImage] = useState([]);
   const [stock, setStock] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [category, setCategory] = useState([]);
+
+  const navigate = useNavigate();
 
   const inputEl1 = useRef();
   const inputEl2 = useRef();
@@ -64,9 +66,13 @@ function AddProductPage() {
       setProductName("");
       setProductDetail("");
       setUnitPrice("");
-      // setImage(null);
+      setImage1(null);
+      setImage2(null);
+      setImage3(null);
+      setImage4(null);
       setStock("");
       setCategoryId("");
+      navigate("/selling");
     } catch (err) {
       console.log(err);
     }
