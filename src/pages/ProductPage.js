@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Avatar from "../components/ui/Avatar";
 import * as productService from "../api/productApi";
-import * as cartService from "../api/cartApi";
 import { useCart } from "../contexts/CartContext";
+import { toast } from "react-toastify";
 
 function ProductPage() {
-  const { handleCart } = useCart();
+  const { addNewProduct } = useCart();
 
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
@@ -26,12 +26,13 @@ function ProductPage() {
 
   const handleAddProduct = async () => {
     try {
-      const res = await cartService.createCartItem(productId);
-      handleCart((prev) => [...prev, res.data.cart]);
+      addNewProduct(product.id);
     } catch (err) {
+      toast.error(err.response?.data?.message);
       console.log(err);
     }
   };
+
   return (
     <>
       {product ? (

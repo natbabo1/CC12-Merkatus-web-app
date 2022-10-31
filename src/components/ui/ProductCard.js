@@ -8,7 +8,7 @@ function ProductCard({ product }) {
   };
   return (
     <div
-      className="w-48 bg-vivid-orange/30 p-4 rounded-3xl"
+      className="w-48 bg-vivid-orange/30 hover:bg-vivid-orange/20 p-4 rounded-3xl cursor-pointer"
       onClick={handleClick}
     >
       <div className="relative w-full pt-[100%] overflow-hidden">

@@ -34,7 +34,7 @@ function CreditCard({ totalAmount }) {
     OmiseCard.open({
       amount: totalAmount,
       onCreateTokenSuccess: async (token) => {
-        const res = await paymentService.payment({
+        await paymentService.payment({
           email: user.email,
           name: user.firstName,
           amount: totalAmount,
@@ -42,8 +42,6 @@ function CreditCard({ totalAmount }) {
           payInId,
           verifiedCheckoutItems
         });
-
-        console.log(res.data);
       },
 
       onFormClosed: () => {}
