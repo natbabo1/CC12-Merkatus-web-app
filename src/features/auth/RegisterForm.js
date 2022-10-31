@@ -63,7 +63,7 @@ function RegisterForm() {
   };
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-    startLoading();
+
     setInputError({});
     const errorsN = validate(input);
     if (Object.keys(errorsN).length > 0) {
@@ -72,6 +72,7 @@ function RegisterForm() {
     }
 
     try {
+      startLoading();
       await register(input);
       toast.success("Success Register");
       closeModal();

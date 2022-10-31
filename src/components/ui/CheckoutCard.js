@@ -18,7 +18,7 @@ function CheckoutCard({ checkoutItem }) {
           <h4 className="text-tin-color mb-2 mt-2"> ชิ้น</h4>
         </div>
         <h4 className="block font-bold mb-2">
-          {toBaht(checkoutItem.Product.unitPrice)}
+          {toBaht(checkoutItem.Product.unitPrice * checkoutItem.count)}
         </h4>
       </div>
     </div>
