@@ -9,6 +9,7 @@ function AdminHorizon() {
           src={
             "https://www.brandbuffet.in.th/wp-content/uploads/2020/08/Doraemon-Cartoon-Character-542x420.jpg"
           }
+          alt="Seller"
         />
         <div className="border-l-2 ml-2 h-full  border-white"></div>
       </div>

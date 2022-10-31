@@ -1,7 +1,7 @@
 import React from "react";
-import PrompayIcon from "../components/icon/PrompayIcon";
-import CreditIcon from "../components/icon/CreditIcon";
-import LinePayIcon from "../components/icon/LinePayIcon";
+// import PrompayIcon from "../components/icon/PrompayIcon";
+// import CreditIcon from "../components/icon/CreditIcon";
+// import LinePayIcon from "../components/icon/LinePayIcon";
 import CheckoutCard from "../components/ui/CheckoutCard";
 import { useCart } from "../contexts/CartContext";
 import CreditCard from "../features/payment/Creditcard";

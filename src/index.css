@@ -9,6 +9,7 @@
 
 :root {
   background: #edecec;
+  --toastify-color-success: #29c6cd !important;
 }
 
 body {

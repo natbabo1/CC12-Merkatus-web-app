@@ -1,14 +1,17 @@
-import CartContainer from "../features/cart/CartContainer";
-import { useCart } from "../contexts/CartContext";
 import { useEffect, useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
+import { useCart } from "../contexts/CartContext";
 import CheckoutPage from "./CheckoutPage";
+import CartContainer from "../features/cart/CartContainer";
+import { toast } from "react-toastify";
+
 function CartPage() {
-  const { user } = useAuth();
-  const { fetch, clearCheckoutItems } = useCart();
+  const { checkoutItems, clearCheckoutItems } = useCart();
   const [isCheckout, setIsCheckout] = useState(false);
 
   const checkout = () => {
+    if (checkoutItems.length === 0) {
+      return toast.warning("กรุณาเลือกสินค้าอย่างน้อย 1 รายการ");
+    }
     setIsCheckout(true);
   };
 
@@ -17,14 +20,11 @@ function CartPage() {
   };
 
   useEffect(() => {
-    if (user) {
-      fetch();
-    }
-
     return () => {
       clearCheckoutItems();
     };
-  }, [clearCheckoutItems, fetch, user]);
+  }, [clearCheckoutItems]);
+
   return (
     <>
       {isCheckout ? (

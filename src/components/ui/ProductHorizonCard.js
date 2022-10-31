@@ -2,46 +2,35 @@ import { useCart } from "../../contexts/CartContext";
 import { toBaht } from "../../utils/numberFormat";
 import { toast } from "react-toastify";
 function ProductHorizonCard({ cartItem, isCheck }) {
-  const { updateCart, deleteCartItem, cart, handleCart } = useCart();
+  const { deleteCartItem, updateCountCart } = useCart();
 
   const handleAddProduct = async () => {
     if (cartItem.count === cartItem.Product.stock) {
       return toast.error("จำนวนสินค้าในคลังไม่เพียงพอ");
     }
-    const newInputCount = cartItem.count + 1;
 
-    handleCart(
-      cart.map((item) =>
-        item.id === cartItem.id ? { ...item, count: newInputCount } : item
-      )
-    );
     try {
-      await updateCart({ cartId: cartItem.id, count: newInputCount });
+      await updateCountCart(cartItem.id, cartItem.count + 1);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handleDeleteProduct = () => {
-    const newCart = cart.filter((item) => item.id !== cartItem.id);
-    handleCart(newCart);
-  };
-
   const handleDecreaseProduct = async () => {
-    const newInputCount = cartItem.count - 1;
+    if (cartItem.count === 1) {
+      return handleDeleteProduct();
+    }
 
     try {
-      if (cartItem.count === 1) {
-        handleDeleteProduct();
-        return await deleteCartItem({ cartId: cartItem.id });
-      }
+      await updateCountCart(cartItem.id, cartItem.count - 1);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-      handleCart(
-        cart.map((item) =>
-          item.id === cartItem.id ? { ...item, count: newInputCount } : item
-        )
-      );
-      await updateCart({ cartId: cartItem.id, count: newInputCount });
+  const handleDeleteProduct = async () => {
+    try {
+      await deleteCartItem(cartItem.id);
     } catch (err) {
       console.log(err);
     }

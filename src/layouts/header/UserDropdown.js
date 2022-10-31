@@ -1,12 +1,29 @@
+import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
 
-function UserDropdown() {
+function UserDropdown({ closeDropdown }) {
   const { logout } = useAuth();
   const { handleCart } = useCart();
   const navigate = useNavigate();
+  const dropdown = useRef();
+
+  useEffect(() => {
+    const handleClickOutsideDropdown = (e) => {
+      if (!dropdown.current.contains(e.target)) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutsideDropdown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideDropdown);
+    };
+  }, [closeDropdown]);
+
   const handleLogout = () => {
     logout();
     handleCart([]);
@@ -18,6 +35,7 @@ function UserDropdown() {
     <div
       className="absolute top-full right-0 bg-cosmic-dust/40 text-vivid-orange text-lg w-40 px-3 mt-3 py-2 rounded-xl backdrop-blur-xl"
       onClick={(e) => e.stopPropagation()}
+      ref={dropdown}
     >
       <Link
         to="/buying"

@@ -6,6 +6,7 @@ import {
   useMemo,
   useState
 } from "react";
+import { toast } from "react-toastify";
 import * as cartService from "../api/cartApi";
 import { useAuth } from "./AuthContext";
 
@@ -63,12 +64,35 @@ function CartContextProvider({ children }) {
     }
   };
 
-  const deleteCartItem = async (input) => {
-    await cartService.deleteCartItem(input);
+  const deleteCartItem = async (cartId) => {
+    await cartService.deleteCartItem({ cartId });
+    setCart((prev) => prev.filter((item) => item.id !== cartId));
   };
 
   const handleCart = (input) => {
     setCart(input);
+  };
+
+  const addNewProduct = async (productId) => {
+    const isProductExist = cart.findIndex(
+      (item) => item.Product.id === productId
+    );
+
+    if (isProductExist !== -1) {
+      return toast.warning("สินค้าได้อยู่ในตะกร้าแล้ว");
+    }
+
+    const res = await cartService.createCartItem(productId);
+    setCart((prev) => [...prev, res.data.cart]);
+  };
+
+  const updateCountCart = async (cartId, newCount) => {
+    await updateCart({ cartId, count: newCount });
+    setCart((prev) =>
+      prev.map((item) =>
+        item.id === cartId ? { ...item, count: newCount } : item
+      )
+    );
   };
 
   return (
@@ -83,7 +107,9 @@ function CartContextProvider({ children }) {
         totalCartItems,
         handleOnCheckbox,
         clearCheckoutItems,
-        checkoutItems
+        checkoutItems,
+        addNewProduct,
+        updateCountCart
       }}
     >
       {children}

@@ -9,7 +9,18 @@ function App() {
       <Spinner />
       <Modal />
       <Router />;
-      <ToastContainer autoClose="2000" theme="colored" />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

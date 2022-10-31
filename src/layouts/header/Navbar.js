@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useModal } from "../../contexts/ModalContext";
 import LoginForm from "../../features/auth/LoginForm";
@@ -18,18 +18,9 @@ function Navbar() {
   const { totalCartItems } = useCart();
 
   const [openDropdown, setOpenDropdown] = useState(false);
-  const dropdown = useRef();
 
-  useEffect(() => {
-    const handleClickOutsideDropdown = (e) => {
-      if (!dropdown.current.contains(e.target)) {
-        setOpenDropdown(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutsideDropdown);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutsideDropdown);
-    };
+  const closeDropdown = useCallback(() => {
+    setOpenDropdown(false);
   }, []);
 
   return (
@@ -58,13 +49,14 @@ function Navbar() {
               {user ? (
                 <div
                   className="relative flex items-center cursor-pointer"
-                  ref={dropdown}
-                  onClick={() => setOpenDropdown((prev) => !prev)}
+                  onClick={() => setOpenDropdown(true)}
                 >
                   <div className="w-12 rounded-full overflow-hidden">
                     <Avatar src={user.profileImage} />
                   </div>
-                  {openDropdown && <UserDropdown />}
+                  {openDropdown && (
+                    <UserDropdown closeDropdown={closeDropdown} />
+                  )}
                 </div>
               ) : (
                 <div
