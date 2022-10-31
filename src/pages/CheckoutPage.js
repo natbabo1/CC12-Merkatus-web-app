@@ -29,7 +29,7 @@ function CheckoutPage({ backToCart }) {
         <i className="fa fa-arrow-left text-vivid-orange text-3xl mr-3" />
         <span>ย้อนกลับ</span>
       </div>
-      <form className="w-full min-h-screen flex flex-col justify-between">
+      <form className="w-full min-h-[80vh] flex flex-col justify-between">
         <div className="w-3/4 mx-auto">
           <div className="flex">
             <div className="mt-4">
@@ -47,7 +47,7 @@ function CheckoutPage({ backToCart }) {
             <CheckoutCard key={item.id} checkoutItem={item} />
           ))}
 
-          <div className="mx-auto">
+          {/* <div className="mx-auto">
             <hr className="bg-mermaid-net border border-mermaid-net" />
             <div className="flex items-center  h-20 px-10">
               <span className="font-semibold">การชำระเงิน</span>
@@ -106,7 +106,7 @@ function CheckoutPage({ backToCart }) {
               />
             </div>
             <hr className="bg-mermaid-net border border-mermaid-net" />
-          </div>
+          </div> */}
         </div>
         <div className="flex justify-end  items-center w-full bg-vivid-orange/40 px-10 py-4 rounded-lg">
           <div className="flex items-center text-vivid-orange font-semibold mr-14">
