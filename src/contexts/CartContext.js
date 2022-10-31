@@ -17,6 +17,24 @@ function CartContextProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState([]);
 
+  const totalCartItems = useMemo(() => cart.length, [cart]);
+
+  const fetchCartItem = useCallback(async () => {
+    try {
+      const res = await cartService.getMyCart();
+
+      setCart(res.data.carts);
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetchCartItem();
+    }
+  }, [fetchCartItem, user]);
+
   const handleOnCheckbox = (e, cartItem) => {
     if (e.target.checked) {
       const item = checkoutItems.find(
@@ -38,23 +56,15 @@ function CartContextProvider({ children }) {
     setCheckoutItems([]);
   }, []);
 
-  const totalCartItems = useMemo(() => cart.length, [cart]);
+  const clearCheckedOutCartItem = (checkedoutItems) => {
+    let newCart = [...cart];
+    checkedoutItems.forEach((checked) => {
+      newCart = newCart.filter((cartItem) => cartItem.id !== checked.id);
+    });
+    setCart(newCart);
+  };
 
-  const fetch = useCallback(async () => {
-    try {
-      const res = await cartService.getMyCart();
-
-      setCart(res.data.carts);
-    } catch (err) {
-      console.log(err);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (user) {
-      fetch();
-    }
-  }, [fetch, user]);
+  const clearCartState = () => setCart([]);
 
   const updateCart = async (input) => {
     try {
@@ -67,10 +77,6 @@ function CartContextProvider({ children }) {
   const deleteCartItem = async (cartId) => {
     await cartService.deleteCartItem({ cartId });
     setCart((prev) => prev.filter((item) => item.id !== cartId));
-  };
-
-  const handleCart = (input) => {
-    setCart(input);
   };
 
   const addNewProduct = async (productId) => {
@@ -99,17 +105,16 @@ function CartContextProvider({ children }) {
     <CartContext.Provider
       value={{
         cart,
-        setCart,
-        updateCart,
         deleteCartItem,
-        fetch,
-        handleCart,
+        fetchCartItem,
+        clearCartState,
         totalCartItems,
         handleOnCheckbox,
         clearCheckoutItems,
         checkoutItems,
         addNewProduct,
-        updateCountCart
+        updateCountCart,
+        clearCheckedOutCartItem
       }}
     >
       {children}
