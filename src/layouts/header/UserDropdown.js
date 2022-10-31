@@ -1,12 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
+import { useCart } from "../../contexts/CartContext";
 
 function UserDropdown() {
   const { logout } = useAuth();
+  const { handleCart } = useCart();
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
+    handleCart([]);
     toast.success("logout success");
     navigate("/");
   };

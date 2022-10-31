@@ -14,7 +14,9 @@ function CreditCard({ totalAmount }) {
   OmiseCard.configure({
     publicKey: "pkey_test_5thvpb77vjhfss7q110",
     currency: "THB",
-    frameLabel: "Maketus",
+    frameLabel: "MERKATUS",
+    image:
+      "https://res.cloudinary.com/dkbiwdyij/image/upload/v1665943585/Merkatus_njoknv.png",
     submitLabel: "Pay NOW",
     buttonLabel: "Pay with Omise"
   });
