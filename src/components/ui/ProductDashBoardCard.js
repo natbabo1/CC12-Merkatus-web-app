@@ -21,7 +21,7 @@ function ProductDashBoardCard({ product }) {
             สต๊อก {product.stock} ชิ้น
           </h4>
         </div>
-        <h4 className="block font-bold mb-2">{toBaht(8888)}</h4>
+        <h4 className="block font-bold mb-2">{toBaht(product.unitPrice)}</h4>
       </div>
     </div>
   );
