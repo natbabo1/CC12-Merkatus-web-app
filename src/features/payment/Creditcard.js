@@ -1,12 +1,17 @@
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
+import { useLoading } from "../../contexts/LoadingContext";
 import * as paymentService from "../../api/paymentApi";
 import * as orderService from "../../api/orderApi";
 
 function CreditCard({ totalAmount }) {
+  const navigate = useNavigate();
+
   const { user } = useAuth();
-  const { checkoutItems } = useCart();
+  const { checkoutItems, clearCheckedOutCartItem } = useCart();
+  const { startLoading, stopLoading } = useLoading();
 
   let OmiseCard;
 
@@ -34,14 +39,24 @@ function CreditCard({ totalAmount }) {
     OmiseCard.open({
       amount: totalAmount,
       onCreateTokenSuccess: async (token) => {
-        await paymentService.payment({
-          email: user.email,
-          name: user.firstName,
-          amount: totalAmount,
-          token: token,
-          payInId,
-          verifiedCheckoutItems
-        });
+        try {
+          startLoading();
+          await paymentService.payment({
+            email: user.email,
+            name: user.firstName,
+            amount: totalAmount,
+            token: token,
+            payInId,
+            verifiedCheckoutItems
+          });
+          clearCheckedOutCartItem(verifiedCheckoutItems);
+          navigate("/");
+        } catch (err) {
+          console.log(err);
+          toast.error(err.response?.data?.message);
+        } finally {
+          stopLoading();
+        }
       },
 
       onFormClosed: () => {}

@@ -6,7 +6,7 @@ import { useCart } from "../../contexts/CartContext";
 
 function UserDropdown({ closeDropdown }) {
   const { logout } = useAuth();
-  const { handleCart } = useCart();
+  const { clearCartState } = useCart();
   const navigate = useNavigate();
   const dropdown = useRef();
 
@@ -26,7 +26,7 @@ function UserDropdown({ closeDropdown }) {
 
   const handleLogout = () => {
     logout();
-    handleCart([]);
+    clearCartState();
     toast.success("logout success");
     navigate("/");
   };
