@@ -4,21 +4,24 @@ import ProductCard from "../../components/ui/ProductCard";
 import ProfileCover from "../../components/ui/ProfileCover";
 import SellerImage from "../../components/ui/SellerImage";
 import * as userService from "../../api/userApi";
+import Star from "../../components/ui/Star";
 
 function SellerProfileContainer() {
   const { sellerId } = useParams();
 
   const [seller, setSeller] = useState(null);
+  const [sellerRating, setSellerRating] = useState(0);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchSeller = async () => {
       const {
-        data: { seller }
+        data: { seller, avgRating }
       } = await userService.getSellerAndProducts(sellerId);
 
       setSeller(seller);
+      setSellerRating(avgRating);
     };
-    fetchProducts();
+    fetchSeller();
   }, [sellerId]);
 
   return (
@@ -29,13 +32,21 @@ function SellerProfileContainer() {
         <h1 className="text-2xl font-bold">
           {seller?.firstName} {seller?.lastName}
         </h1>
-        <div className="flex flex-row">
-          <button className="text-white bg-vivid-orange hover:bg-vivid-orange/80 rounded-lg text-sm px-8 py-2 mr-2 mb-2 font-bold">
+        <div className="flex flex-row items-center">
+          {/* <button className="text-white bg-vivid-orange hover:bg-vivid-orange/80 rounded-lg text-sm px-8 py-2 mr-2 mb-2 font-bold">
             Follow
           </button>
           <button className="text-white  bg-vivid-orange hover:bg-vivid-orange/80 rounded-lg text-sm px-8 py-2 mr-2 mb-2 font-bold">
             Follow
-          </button>
+          </button> */}
+          <Star color="vivid-orange" fill={sellerRating} />
+          <Star color="vivid-orange" fill={sellerRating - 1} />
+          <Star color="vivid-orange" fill={sellerRating - 2} />
+          <Star color="vivid-orange" fill={sellerRating - 3} />
+          <Star color="vivid-orange" fill={sellerRating - 4} />
+          <div className="font-semibold bg-vivid-orange text-white text-xs px-1 ml-2 rounded-md">
+            {(+sellerRating).toFixed(1)}
+          </div>
         </div>
       </div>
 

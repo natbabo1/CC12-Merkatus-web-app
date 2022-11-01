@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Avatar from "../components/ui/Avatar";
-import * as productService from "../api/productApi";
-import { useCart } from "../contexts/CartContext";
 import { toast } from "react-toastify";
+import { useCart } from "../contexts/CartContext";
+import Avatar from "../components/ui/Avatar";
+import Spinner from "../components/ui/Spinner";
+import * as productService from "../api/productApi";
+import * as userService from "../api/userApi";
+import { Rating } from "flowbite-react";
+import Star from "../components/ui/Star";
 
 function ProductPage() {
   const { addNewProduct } = useCart();
 
   const [product, setProduct] = useState(null);
+  const [sellerRating, setSellerRating] = useState(null);
+
   const { productId } = useParams();
 
   useEffect(() => {
-    const fetch = async () => {
+    const fetchProductAndSellerRating = async () => {
       try {
-        const res = await productService.getProductById(productId);
-
-        setProduct(res.data.product);
+        const resProduct = await productService.getProductById(productId);
+        const resSellerRating = await userService.getSellerRating(
+          resProduct.data.product.Seller.id
+        );
+        setProduct(resProduct.data.product);
+        setSellerRating(+resSellerRating.data.avgRating);
       } catch (err) {
+        toast.error(err.response?.data?.message);
         console.log(err);
       }
     };
-    fetch();
+
+    fetchProductAndSellerRating();
   }, [productId]);
 
   const handleAddProduct = async () => {
@@ -124,15 +135,20 @@ function ProductPage() {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/2 border-l-2 border-white h-full">
-                  <p className="text-white pl-4">Rating</p>
+                <div className="w-1/2 border-l-2 border-white pl-4 h-full">
+                  <p className="text-white mb-1">Rating</p>
+                  <Star fill={sellerRating} />
+                  <Star fill={sellerRating - 1} />
+                  <Star fill={sellerRating - 2} />
+                  <Star fill={sellerRating - 3} />
+                  <Star fill={sellerRating - 4} />
                 </div>
               </div>
             </div>
           </div>
         </>
       ) : (
-        ""
+        <Spinner />
       )}
     </>
   );
