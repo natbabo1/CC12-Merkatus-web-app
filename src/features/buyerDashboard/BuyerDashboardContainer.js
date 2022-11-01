@@ -2,11 +2,13 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
+import { useModal } from "../../contexts/ModalContext";
 import { useLoading } from "../../contexts/LoadingContext";
 import Avatar from "../../components/ui/Avatar";
 import ProductListing from "../../components/ui/ProductListing";
 import OrderHorizonCard from "../../components/ui/OrderHorizonCard";
 import ProductFilterMenu from "./ProductFilterMenu";
+import RatingForm from "./RatingForm";
 import * as orderService from "../../api/orderApi";
 import { listingNameCreate } from "../../utils/listingName";
 import {
@@ -21,6 +23,7 @@ function BuyerDashboardContainer() {
   const navigate = useNavigate();
 
   const { startLoading, stopLoading } = useLoading();
+  const { openFormModal } = useModal();
 
   const {
     user: { profileImage }
@@ -43,14 +46,24 @@ function BuyerDashboardContainer() {
     }
   }, []);
 
+  const rateOrder = async (orderId, score) => {
+    const {
+      data: { order }
+    } = await orderService.rateOrder(orderId, score);
+    setOrders((prev) =>
+      prev.map((item) => (item.id === order.id ? order : item))
+    );
+  };
+
   const onClickByStatus = useMemo(
     () => ({
       [PAID]: (order) => navigate(`/product/${order.Product.id}`),
       [TRANSFER]: confirmOrder,
       [ARRIVED]: confirmOrder,
-      [RECEIVED]: null //function to rate the order
+      [RECEIVED]: (order) =>
+        openFormModal(<RatingForm order={order} rateOrder={rateOrder} />) //function to rate the order
     }),
-    [confirmOrder, navigate]
+    [confirmOrder, navigate, openFormModal]
   );
 
   const toProductHorizonCard = useCallback(

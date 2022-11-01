@@ -28,14 +28,14 @@ function AddProductPage() {
     try {
       const formData = new FormData();
       if (
-        !productName &&
-        !productDetail &&
-        !unitPrice &&
-        !image1 &&
-        !image2 &&
-        !image3 &&
-        !image4 &&
-        !stock &&
+        !productName ||
+        !productDetail ||
+        !unitPrice ||
+        !image1 ||
+        !image2 ||
+        !image3 ||
+        !image4 ||
+        !stock ||
         !categoryId
       ) {
         return toast.error("กรุณากรอกข้อมูลให้ครบ");
