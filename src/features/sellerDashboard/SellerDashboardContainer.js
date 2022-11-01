@@ -66,6 +66,7 @@ function SellerDashboardContainer() {
   const listingName = useMemo(() => listingNameSeller(filter), [filter]);
 
   const updateOrder = useCallback((newOrder) => {
+    console.log(newOrder);
     setOrders((prev) =>
       prev.map((item) => (item.id === newOrder.id ? newOrder : item))
     );

@@ -34,9 +34,9 @@ function BuyerDashboardContainer() {
       const {
         data: { order }
       } = await orderService.confirmOrder(input.id);
-      setOrders((prev) => [
-        ...prev.map((item) => (item.id === order.id ? order : item))
-      ]);
+      setOrders((prev) =>
+        prev.map((item) => (item.id === order.id ? order : item))
+      );
     } catch (err) {
       toast.error(err.response?.data?.message);
       console.log(err);
