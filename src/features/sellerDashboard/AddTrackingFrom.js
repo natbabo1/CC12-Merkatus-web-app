@@ -13,9 +13,11 @@ function AddTrackingFrom({ order, updateOrder }) {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    startLoading();
     try {
-      const newOrder = await orderService.addTrackingNo(order.id, {
+      startLoading();
+      const {
+        data: { order: newOrder }
+      } = await orderService.addTrackingNo(order.id, {
         status: TRANSFER,
         trackingNo: trackNo.current.value
       });
