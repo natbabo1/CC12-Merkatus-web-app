@@ -3,13 +3,17 @@ import React from "react";
 // import CreditIcon from "../components/icon/CreditIcon";
 // import LinePayIcon from "../components/icon/LinePayIcon";
 import CheckoutCard from "../components/ui/CheckoutCard";
+import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
+import { useModal } from "../contexts/ModalContext";
 import CreditCard from "../features/payment/Creditcard";
 import { toComma } from "../utils/numberFormat";
+import ChangeAddressPage from "./ChangeAddressPage";
 
 function CheckoutPage({ backToCart }) {
   const { checkoutItems, clearCheckoutItems } = useCart();
-
+  const { openFormModal } = useModal();
+  const { user } = useAuth();
   const totalAmount = checkoutItems.reduce(
     (sum, item) => sum + item.Product.unitPrice * item.count,
     0
@@ -35,10 +39,30 @@ function CheckoutPage({ backToCart }) {
             <div className="mt-4">
               <i className="fas fa-map-marker-alt text-vivid-orange text-3xl mr-3" />
             </div>
-            <div className="flex flex-col my-4 gap-2 font-semibold">
+            <div className="flex flex-col my-4 gap-2 font-semibold w-full">
               <span className="text-vivid-orange">ที่อยู่ในการจัดส่ง</span>
-              <span>กอลั่ม ร่างแรก</span>
-              <span>233 สป็อต วานิลลาลาติน ฮาราคีรีอินเตอร์คอมเมนท์</span>
+              {user.address ? (
+                <div className="flex w-full justify-between">
+                  <div className="">
+                    <span>{user.address}</span>
+                  </div>
+                  <div>
+                    <span
+                      className="text-red-600 cursor-pointer"
+                      onClick={() => openFormModal(<ChangeAddressPage />)}
+                    >
+                      แก้ไข
+                    </span>
+                  </div>
+                </div>
+              ) : (
+                <span
+                  className="text-red-600 cursor-pointer w-52"
+                  onClick={() => openFormModal(<ChangeAddressPage />)}
+                >
+                  กดที่นี่เพื่อเพิ่มที่อยู่ในการจัดส่ง
+                </span>
+              )}
             </div>
           </div>
 

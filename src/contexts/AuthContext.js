@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import * as authService from "../api/authApi";
 import { useLoading } from "./LoadingContext";
 import {
@@ -14,22 +20,22 @@ function AuthContextProvider({ children }) {
 
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        if (getAccessToken()) {
-          await getMe();
-        }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        stopLoading();
+  const fetch = useCallback(async () => {
+    try {
+      if (getAccessToken()) {
+        await getMe();
       }
-    };
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  }, []);
 
+  useEffect(() => {
     startLoading();
     fetch();
-  }, [startLoading, stopLoading]);
+  }, [startLoading, stopLoading, fetch]);
 
   const register = async (input) => {
     const res = await authService.register(input);
@@ -53,8 +59,15 @@ function AuthContextProvider({ children }) {
     setUser(res.data.user);
   };
 
+  const updateAddress = async (input) => {
+    await authService.updateAddress(input);
+    fetch();
+  };
+
   return (
-    <AuthContext.Provider value={{ login, user, register, logout }}>
+    <AuthContext.Provider
+      value={{ login, user, register, logout, updateAddress, fetch }}
+    >
       {children}
     </AuthContext.Provider>
   );
