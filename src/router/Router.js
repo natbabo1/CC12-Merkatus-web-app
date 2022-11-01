@@ -18,6 +18,7 @@ import ChangePasswordPage from "../pages/ChangePasswordPage";
 import { useAuth } from "../contexts/AuthContext";
 import ChangeEmailPage from "../pages/ChangeEmailPage";
 import SearchProductPage from "../pages/SearchProductPage";
+import ChangeAddressPage from "../pages/ChangeAddressPage";
 
 function Router() {
   const { user } = useAuth();
@@ -34,7 +35,7 @@ function Router() {
         {user ? (
           <>
             <Route path="/addproduct" element={<AddProductPage />} />
-            <Route path="/address" element={<AddressEditPage />} />
+            {/* <Route path="/address" element={<AddressEditPage />} /> */}
             <Route path="/mycart" element={<CartPage />} />
             <Route path="/checkout" element={<CheckoutPage />} />
             <Route path="/selling" element={<SellingPage />} />
@@ -42,6 +43,7 @@ function Router() {
             <Route path="setting" element={<SettingPage />} />
             <Route path="/password" element={<ChangePasswordPage />} />
             <Route path="/email" element={<ChangeEmailPage />} />
+            <Route path="/address" element={<ChangeAddressPage />} />
           </>
         ) : (
           <Route path="/*" element={<NotLoginPage />} />
