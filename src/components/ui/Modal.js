@@ -17,11 +17,11 @@ function Modal() {
         <div
           className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center bg-black/80"
           tabIndex={-1}
-          onClick={closeModal}
+          onMouseDown={closeModal}
         >
           <div
             className="relative p-10 w-full max-w-xl h-full md:h-auto"
-            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
           >
             <div className="relative bg-whisper rounded-xl shadow pt-1 pb-16 px-12">
               {openModal}

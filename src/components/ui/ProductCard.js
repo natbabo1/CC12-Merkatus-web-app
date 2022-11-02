@@ -8,7 +8,7 @@ function ProductCard({ product }) {
   };
   return (
     <div
-      className="w-48 bg-vivid-orange/30 hover:bg-vivid-orange/20 p-4 rounded-3xl cursor-pointer"
+      className="w-48 bg-vivid-orange/30 hover:bg-vivid-orange/20 p-4 rounded-3xl cursor-pointer flex flex-col"
       onClick={handleClick}
     >
       <div className="relative w-full pt-[100%] overflow-hidden">
@@ -18,10 +18,14 @@ function ProductCard({ product }) {
           alt="category"
         />
       </div>
-      <div className="flex flex-col items-center mt-4">
-        <div className="text-xl">{product.productName}</div>
-        <div className="text-vivid-orange text-base text-center mt-1 h-16">
-          {product.Category.categoryName}
+      <div className="flex flex-col items-center mt-4 grow justify-between">
+        <div className="max-w-full break-words">
+          <div className="text-xl text-center max-w-full">
+            {product.productName}
+          </div>
+          <div className="text-vivid-orange text-base text-center mt-1 h-16 whitespace-pre-wrap">
+            {product.Category.categoryName}
+          </div>
         </div>
         <div className="text-xl font-semibold">{toBaht(product.unitPrice)}</div>
       </div>
