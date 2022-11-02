@@ -11,14 +11,7 @@ import DashboardGroup from "./DashboardGroup";
 import SellerMenu from "./SellerMenu";
 import AddtrackingFrom from "./AddTrackingFrom";
 import { listingNameSeller } from "../../utils/listingName";
-import {
-  SELLER,
-  PAID,
-  TRANSFER,
-  ARRIVED,
-  RECEIVED,
-  RATED
-} from "../../utils/constaint";
+import { SELLER, PAID, TRANSFER, ARRIVED } from "../../utils/constaint";
 import * as orderService from "../../api/orderApi";
 import * as productService from "../../api/productApi";
 
@@ -120,24 +113,6 @@ function SellerDashboardContainer() {
       ),
     [orders, onClickByStatus]
   );
-  const totalOrders = useMemo(
-    () =>
-      orders.reduce(
-        (acc, item) =>
-          item.status === RECEIVED || item.status === RATED
-            ? [
-                ...acc,
-                <OrderHorizonCard
-                  role={SELLER}
-                  order={item}
-                  onClickButton={() => onClickByStatus[item.status](item)}
-                />
-              ]
-            : acc,
-        []
-      ),
-    [orders, onClickByStatus]
-  );
 
   const filteredOrders = useMemo(
     () =>
@@ -173,7 +148,6 @@ function SellerDashboardContainer() {
           wallet={wallet}
           ordersToSent={ordersToSent.length}
           waitingOrders={waitingOrders.length}
-          totalOrders={totalOrders.length}
         />
       </div>
       <div className="flex w-full ">

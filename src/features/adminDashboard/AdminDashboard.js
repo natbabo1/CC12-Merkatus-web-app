@@ -1,9 +1,9 @@
 import { Avatar } from "flowbite-react";
 import React from "react";
-import AdminHorizon from "../components/ui/AdminHorizon";
-import ProductListing from "../components/ui/ProductListing";
-import AdminDashboardGroup from "../features/adminDashboard/AdminDashboardGroup";
-import AdminMenu from "../features/adminDashboard/AdminMenu";
+import AdminHorizon from "../../components/ui/AdminHorizon";
+import ProductListing from "../../components/ui/ProductListing";
+import AdminDashboardGroup from "./AdminDashboardGroup";
+import AdminMenu from "./AdminMenu";
 
 function AdminDashboard() {
   return (

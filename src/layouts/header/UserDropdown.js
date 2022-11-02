@@ -1,11 +1,13 @@
+import userEvent from "@testing-library/user-event";
 import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../contexts/AuthContext";
 import { useCart } from "../../contexts/CartContext";
+import { ADMIN } from "../../utils/constaint";
 
 function UserDropdown({ closeDropdown }) {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const { clearCartState } = useCart();
   const navigate = useNavigate();
   const dropdown = useRef();
@@ -20,6 +22,7 @@ function UserDropdown({ closeDropdown }) {
     document.addEventListener("mousedown", handleClickOutsideDropdown);
 
     return () => {
+      closeDropdown();
       document.removeEventListener("mousedown", handleClickOutsideDropdown);
     };
   }, [closeDropdown]);
@@ -37,18 +40,29 @@ function UserDropdown({ closeDropdown }) {
       onClick={(e) => e.stopPropagation()}
       ref={dropdown}
     >
-      <Link
-        to="/buying"
-        className="block py-2 cursor-pointer hover:text-tin-color"
-      >
-        สถานะการสั่งซื้อ
-      </Link>
-      <Link
-        to="/selling"
-        className="block py-2 cursor-pointer hover:text-tin-color"
-      >
-        ร้านค้าของฉัน
-      </Link>
+      {user.role === ADMIN ? (
+        <Link
+          to="/admin"
+          className="block py-2 cursor-pointer hover:text-tin-color"
+        >
+          Admin Panel
+        </Link>
+      ) : (
+        <>
+          <Link
+            to="/buying"
+            className="block py-2 cursor-pointer hover:text-tin-color"
+          >
+            สถานะการสั่งซื้อ
+          </Link>
+          <Link
+            to="/selling"
+            className="block py-2 cursor-pointer hover:text-tin-color"
+          >
+            ร้านค้าของฉัน
+          </Link>
+        </>
+      )}
       <Link to="/setting" className="py-2 cursor-pointer hover:text-tin-color">
         ตั้งค่า
       </Link>
