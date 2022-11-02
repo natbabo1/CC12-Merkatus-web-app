@@ -30,7 +30,7 @@ function AuthContextProvider({ children }) {
     } finally {
       stopLoading();
     }
-  }, []);
+  }, [stopLoading]);
 
   useEffect(() => {
     startLoading();

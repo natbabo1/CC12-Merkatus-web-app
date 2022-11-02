@@ -6,14 +6,18 @@ import {
   useMemo,
   useState
 } from "react";
+import { useAuth } from "./AuthContext";
+import { useModal } from "./ModalContext";
 import { toast } from "react-toastify";
 import * as cartService from "../api/cartApi";
-import { useAuth } from "./AuthContext";
+import LoginForm from "../features/auth/LoginForm";
 
 const CartContext = createContext();
 
 function CartContextProvider({ children }) {
   const { user } = useAuth();
+  const { openFormModal } = useModal();
+
   const [cart, setCart] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState([]);
 
@@ -80,16 +84,19 @@ function CartContextProvider({ children }) {
   };
 
   const addNewProduct = async (productId) => {
-    const isProductExist = cart.findIndex(
-      (item) => item.Product.id === productId
-    );
+    if (user) {
+      const isProductExist = cart.findIndex(
+        (item) => item.Product.id === productId
+      );
 
-    if (isProductExist !== -1) {
-      return toast.warning("สินค้าได้อยู่ในตะกร้าแล้ว");
+      if (isProductExist !== -1) {
+        return toast.warning("สินค้าได้อยู่ในตะกร้าแล้ว");
+      }
+
+      const res = await cartService.createCartItem(productId);
+      return setCart((prev) => [...prev, res.data.cart]);
     }
-
-    const res = await cartService.createCartItem(productId);
-    setCart((prev) => [...prev, res.data.cart]);
+    openFormModal(<LoginForm />);
   };
 
   const updateCountCart = async (cartId, newCount) => {

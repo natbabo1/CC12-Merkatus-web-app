@@ -7,7 +7,6 @@ import ProductPage from "../pages/ProductPage";
 import CategoryPage from "../pages/CategoryPage";
 import SellerProfilePage from "../pages/SellerProfilePage";
 import AdminDashboard from "../pages/AdminDashboard";
-import AddressEditPage from "../pages/AddressEditPage";
 import AddProductPage from "../pages/AddProductPage";
 import CartPage from "../pages/CartPage";
 import SettingPage from "../pages/SettingPage";
