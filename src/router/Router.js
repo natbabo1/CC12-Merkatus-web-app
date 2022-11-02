@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/HomePage";
 import SellingPage from "../pages/SellingPage";
@@ -6,7 +7,6 @@ import BuyingPage from "../pages/BuyingPage";
 import ProductPage from "../pages/ProductPage";
 import CategoryPage from "../pages/CategoryPage";
 import SellerProfilePage from "../pages/SellerProfilePage";
-import AdminDashboard from "../pages/AdminDashboard";
 import AddProductPage from "../pages/AddProductPage";
 import CartPage from "../pages/CartPage";
 import SettingPage from "../pages/SettingPage";
@@ -14,10 +14,11 @@ import CheckoutPage from "../pages/CheckoutPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import NotLoginPage from "../pages/NotLoginPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
-import { useAuth } from "../contexts/AuthContext";
 import ChangeEmailPage from "../pages/ChangeEmailPage";
 import SearchProductPage from "../pages/SearchProductPage";
 import ChangeAddressPage from "../pages/ChangeAddressPage";
+import AdminPage from "../pages/AdminPage";
+import { ADMIN } from "../utils/constaint";
 
 function Router() {
   const { user } = useAuth();
@@ -29,7 +30,6 @@ function Router() {
         <Route path="product/:productId" element={<ProductPage />} />
         <Route path="category/:categoryId" element={<CategoryPage />} />
         <Route path="profile/:sellerId" element={<SellerProfilePage />} />
-        <Route path="admin" element={<AdminDashboard />} />
         <Route path="search/:search" element={<SearchProductPage />} />
         {user ? (
           <>
@@ -43,6 +43,9 @@ function Router() {
             <Route path="/password" element={<ChangePasswordPage />} />
             <Route path="/email" element={<ChangeEmailPage />} />
             <Route path="/address" element={<ChangeAddressPage />} />
+            {user.role === ADMIN ? (
+              <Route path="/admin" element={<AdminPage />} />
+            ) : null}
           </>
         ) : (
           <Route path="/*" element={<NotLoginPage />} />
