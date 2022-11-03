@@ -1,11 +1,5 @@
 import { useMemo } from "react";
-import {
-  ACCEPTED,
-  COMPLETED,
-  PENDING,
-  RECEIVED,
-  REJECTED
-} from "../../utils/constaint";
+import { ACCEPTED, COMPLETED, PENDING, REJECTED } from "../../utils/constaint";
 import { toBaht } from "../../utils/numberFormat";
 
 function RequestList({ request }) {
@@ -29,9 +23,7 @@ function RequestList({ request }) {
         <span className="text-tin-color">{request.createdAt.slice(0, 10)}</span>
         : {toBaht(request.amount)}
       </div>
-      <div className={`font-semibold text-${statusColor}`}>
-        {request.status}
-      </div>
+      <div className={`font-medium text-${statusColor}`}>{request.status}</div>
     </div>
   );
 }

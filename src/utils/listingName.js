@@ -1,4 +1,13 @@
-import { PAID, RECEIVED, TRANSFER, RATED } from "./constaint";
+import {
+  PAID,
+  RECEIVED,
+  TRANSFER,
+  RATED,
+  PENDING,
+  ACCEPTED,
+  REJECTED,
+  COMPLETED
+} from "./constaint";
 
 const listingNameCreate = (filter) => {
   if (filter === PAID) {
@@ -30,4 +39,19 @@ const listingNameSeller = (filter) => {
   }
 };
 
-export { listingNameCreate, listingNameSeller };
+const listingNameAdmin = (filter) => {
+  if (filter === PENDING) {
+    return "คำขอถอนเงิน";
+  }
+  if (filter === ACCEPTED) {
+    return "ที่กำลังดำเนินการ";
+  }
+  if (filter === REJECTED) {
+    return "ที่ถูกปฏิเสธ";
+  }
+  if (filter === COMPLETED) {
+    return "ที่เสร็จสิ้น";
+  }
+};
+
+export { listingNameCreate, listingNameSeller, listingNameAdmin };
