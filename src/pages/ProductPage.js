@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useCart } from "../contexts/CartContext";
 import Avatar from "../components/ui/Avatar";
 import Spinner from "../components/ui/Spinner";
 import * as productService from "../api/productApi";
 import * as userService from "../api/userApi";
-import { Rating } from "flowbite-react";
 import Star from "../components/ui/Star";
 
 function ProductPage() {
@@ -16,6 +15,7 @@ function ProductPage() {
   const [sellerRating, setSellerRating] = useState(null);
 
   const { productId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProductAndSellerRating = async () => {
@@ -124,12 +124,13 @@ function ProductPage() {
                   </div>
                   <div className="w-1/2 h-full flex flex-col justify-between items-center gap-y-3">
                     <div
-                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net`}
+                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-white active:bg-mermaid-net active:text-white active:border-mermaid-net`}
                     >
                       แชทเลย
                     </div>
                     <div
-                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-vivid-orange hover:text-vivid-orange active:bg-mermaid-net active:text-white active:border-mermaid-net`}
+                      className={`text-white flex items-center w-28  justify-center bg-mermaid-net h-14 rounded-lg cursor-pointer hover:bg-transparent hover:border-2 hover:border-white active:bg-mermaid-net active:text-white active:border-mermaid-net`}
+                      onClick={() => navigate(`/profile/${product.sellerId}`)}
                     >
                       ดูร้านค้า
                     </div>
